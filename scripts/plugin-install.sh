@@ -1,3 +1,5 @@
+#TODO FIXME put credential in env?
+
 NEXUS_IP=$1
 NEXUS_PORT=$2
 
@@ -8,6 +10,7 @@ if [[ -z "$NEXUS_IP" || -z "$NEXUS_PORT" ]]; then
 else
 	echo "configuring docker to use remote registry $NEXUS_IP:$NEXUS_PORT"
 	REGISTRY_URL=$NEXUS_IP:$NEXUS_PORT
+	echo admin123 | docker login --username admin --password-stdin http://10.100.110.101:5000/v2/
 fi
 
 #!/bin/bash
