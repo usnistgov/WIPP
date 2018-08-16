@@ -1,0 +1,56 @@
+{
+  "name": "convolution-plugin",
+  "version": "0.1.0",
+  "title": "Convolution plugin",
+  "description": "Plugin for convolution",
+
+  "containerId": "localhost:5000/wippconv:0.1",
+
+  "inputs": [
+    {
+      "name": "input",
+      "type": "collection",
+      "format_type": "tiledtiff",
+      "required": true,
+      "description": "Images inputs for the plugin."
+    },
+    {
+      "name": "algorithm",
+      "type": "string",
+      "enum": [
+        "expensive",
+        "conv3",
+        "thresh",
+        "label"
+      ],
+      "description": "Convolution algorithm"
+    },
+    {
+      "name": "connectivity",
+      "type": "number",
+      "required": true,
+      "description": "Connectivity"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "output",
+      "type": "collection",
+      "format_type": "tiledtiff",
+      "required": true,
+      "description": "Output data for the plugin"
+    }
+  ],
+  "ui": [
+    {
+      "key": "inputs.input",
+      "title": "Image Collection : ",
+      "description": "Pick a collection..."
+    },
+    {
+      "key": "inputs.algorithm",
+      "title": "Algorithm: ",
+      "description": "Algorithm: "
+    }
+  ]
+}
