@@ -3,7 +3,6 @@
 Infrastructure for a single-machine Kubernetes cluster.
 However, this install can be the starting point for a creating a cluster of kubernetes nodes.
 
-
 **Disclaimer:** This installation is lacking security features and is not 
 considered stable. Never, ever, use it in production!
 
@@ -19,7 +18,7 @@ vagrant plugin install vagrant-disksize
 
 [Requirements](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/)
 
-```One or more machines running a deb/rpm-compatible OS, for example Ubuntu or CentOS
+One or more machines running a deb/rpm-compatible OS, for example Ubuntu or CentOS
 2 GB or more of RAM per machine. Any less leaves little room for your apps.
 2 CPUs or more on the master
 Full network connectivity among all machines in the cluster. A public or private network is fine.```
@@ -100,6 +99,11 @@ images. Keep in mind that:
 * The conversion plugin accepts TIFF as input and outputs tiled TIFF.
 * The worflow system can map output from previous steps by starting typing `{{` 
 in the image search bar.
+
+## Contributions
+
+This repository is using the `git-flow` publishing model. Please refer to
+https://danielkummer.github.io/git-flow-cheatsheet/ for more information.
 
 ## Troubleshooting
 
