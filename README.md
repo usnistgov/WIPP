@@ -1,4 +1,4 @@
-# Single-machine Kubernetes Cluster. 
+# WIPP deployment
 
 Infrastructure for a single-machine Kubernetes cluster.
 However, this install can be the starting point for a creating a cluster of kubernetes nodes.

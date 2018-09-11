@@ -5,6 +5,8 @@ NEXUS_PORT=$2
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 PARENT_DIR=$(dirname "$SCRIPT_PATH")
 
+API_ADDR="localhost:51502"
+
 # Configure remote registry if defined
 if [[ -z "$NEXUS_IP" || -z "$NEXUS_PORT" ]]; then
 	echo "deploying local registry"
@@ -30,10 +32,12 @@ git clone https://gitlab.nist.gov/gitlab/fss/plugins-ui-ngx.git ~/gui
 cd ~/gui
 npm install
 
+# TODO Replace with a better method
+# Setup the address of the Spring API within the frontend
 for f in `find ./src -name "*.ts"`
 do
     sed -i \
-        -e "s;localhost:8080;localhost:51502;g" \
+        -e "s;localhost:8080;${API_ADDR};g" \
         ${f}
 done
 nohup npm start &
