@@ -1,3 +1,4 @@
+#!/bin/bash
 #TODO FIXME put credential in env?
 
 NEXUS_IP=$1
@@ -13,7 +14,7 @@ else
 	echo admin123 | docker login --username admin --password-stdin http://10.100.110.101:5000/v2/
 fi
 
-#!/bin/bash
+# TODO use a list of plugins instead
 # Download, build and store the thresholding into the local registry
 git clone https://gitlab.nist.gov/gitlab/WIPP/WIPP-thresholding-plugin.git ~/thresholding
 cd ~/thresholding

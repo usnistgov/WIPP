@@ -1,19 +1,30 @@
 #!/bin/bash
-NEXUS_IP=$1
-NEXUS_PORT=$2
+#
+#
+if [ $# -lt 1 ]
+then
+	echo "Illegal number of arguments. Please use: ./poc-install.sh \$api_addr [\$nexus_ip \$nexus_port]"
+	exit
+fi
+
+# Script parameters
+API_ADDR="$1"
+NEXUS_IP=$2
+NEXUS_PORT=$3
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 PARENT_DIR=$(dirname "$SCRIPT_PATH")
 
 # Configure remote registry if defined
 if [[ -z "$NEXUS_IP" || -z "$NEXUS_PORT" ]]; then
-	echo "deploying local registry"
+	echo "Deploying local registry..."
 	docker run -d --name registry -p 5000:5000 --restart always registry:2
 else
-	echo "configuring docker to use remote registry $NEXUS_IP:$NEXUS_PORT"
-	sudo python dockerconf.py $NEXUS_IP $NEXUS_PORT
+	echo "Configuring docker to use registry at $NEXUS_IP:$NEXUS_PORT..."
+	sudo python ${SCRIPT_PATH}/dockerconf.py $NEXUS_IP $NEXUS_PORT
 	sudo systemctl restart docker
 fi
+echo "Docker registry configured..."
 
 # Install java 8, node, npm and maven
 sudo add-apt-repository ppa:openjdk-r/ppa
@@ -30,10 +41,12 @@ git clone https://gitlab.nist.gov/gitlab/fss/plugins-ui-ngx.git ~/gui
 cd ~/gui
 npm install
 
+# TODO Replace with a better method
+# Setup the address of the Spring API within the frontend
 for f in `find ./src -name "*.ts"`
 do
     sed -i \
-        -e "s;localhost:8080;localhost:51502;g" \
+        -e "s;localhost:8080;${API_ADDR};g" \
         ${f}
 done
 nohup npm start &
