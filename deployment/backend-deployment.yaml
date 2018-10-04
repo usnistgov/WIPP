@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: backend
+  name: backend
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: backend
+    spec:
+      containers:
+      - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_backend:3.0.0-alpha1
+        name: backend
+        args: ["10.0.2.15", "30301"]
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+status: {}

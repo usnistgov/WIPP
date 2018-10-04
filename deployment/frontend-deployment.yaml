@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: frontend
+    spec:
+      containers:
+      - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_frontend:3.0.0-alpha1
+        name: frontend
+        args: ["10.0.2.15", "30201"]
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+status: {}
