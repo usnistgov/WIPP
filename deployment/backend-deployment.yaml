@@ -21,9 +21,29 @@ spec:
       - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_backend:3.0.0-alpha1
         name: backend
         args: ["10.0.2.15", "30301"]
+        volumeMounts:
+        - mountPath: /usr/local/bin/argo
+          name: argo
+        - mountPath: /tmp/kubeconfig
+          name: config
+        - mountPath: /data/plugins
+          name: data
         ports:
         - containerPort: 8080
         resources: {}
+      volumes:
+      - name: argo
+        hostPath:
+          path: /usr/local/bin/argo
+          type: File
+      - name: config
+        hostPath:
+          path: /etc/kubernetes/admin.conf
+          type: File
+      - name: data
+        hostPath:
+          path: /data/plugins
+          type: Directory
       restartPolicy: Always
       imagePullSecrets:
       - name: regcred
