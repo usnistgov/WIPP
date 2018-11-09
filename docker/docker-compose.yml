@@ -1,0 +1,39 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:3.6
+    restart: always
+    ports:
+    - 27017:27017
+    networks:
+    - wipp_net
+  backend:
+    image: backend
+    build:
+      context: ./backend
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    restart: always
+    command: mongo 27017
+    ports:
+      - 8080:8080
+    networks:
+      - wipp_net
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    links:
+      - backend
+    restart: always
+    command: ["backend", "8080"]
+    ports:
+      - 80:80
+    networks:
+      - wipp_net
+networks:
+  wipp_net:
