@@ -1,7 +1,8 @@
 # WIPP deployment
 
-Infrastructure for a single-machine Kubernetes cluster.
-However, this install can be the starting point for a creating a cluster of kubernetes nodes.
+Infrastructure to deploy WIPP 3.0 on a single-machine Kubernetes cluster. 
+However, this install can be the starting point for a creating a cluster of 
+kubernetes nodes.
 
 **Disclaimer:** This installation is lacking security features and is not 
 considered stable. Never, ever, use it in production!
@@ -16,21 +17,15 @@ plugin with the following command:
 vagrant plugin install vagrant-disksize
 ```
 
-[Requirements](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/)
-
-One or more machines running a deb/rpm-compatible OS, for example Ubuntu or CentOS
-2 GB or more of RAM per machine. Any less leaves little room for your apps.
-2 CPUs or more on the master
-Full network connectivity among all machines in the cluster. A public or private network is fine.```
-
 The resources needed for the VM are listed below:
 * 2 CPUs
 * 4 GB of RAM
 * 30 GB of HDD
 
 These requirements are minimal and mainly driven by the Kubernetes 
-requirements. The machine broadcasts on 4 ports (51501-51504). If you wish to 
-access the application externally make sure to allow traffic on these ports.
+[requirements](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/). 
+The machine broadcasts on 4 ports (51501-51504). If you wish to access the 
+application externally make sure to allow traffic on these ports.
 
 
 ## Machine startup
