@@ -1,51 +1,24 @@
 # WIPP deployment
 
-Infrastructure to deploy WIPP 3.0 on a single-machine Kubernetes cluster. 
-However, this install can be the starting point for a creating a cluster of 
-kubernetes nodes.
+Infrastructure to deploy WIPP 3.0 on a single-machine Kubernetes cluster.
 
 **Disclaimer:** This installation is lacking security features and is not 
 considered stable. Never, ever, use it in production!
 
 ## Prerequisites
 
-Install the **Vagrant** software following the steps describe at 
-https://www.vagrantup.com/docs/installation/. Install the `vagrant-disksize`
-plugin with the following command:
+### Kubernetes cluster
 
-```bash
-vagrant plugin install vagrant-disksize
-```
+A Kubernetes cluster is needed for this install to work properly, following the official
+[instructions](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/).
 
-The resources needed for the VM are listed below:
-* 2 CPUs
-* 4 GB of RAM
-* 30 GB of HDD
-
-These requirements are minimal and mainly driven by the Kubernetes 
-[requirements](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/). 
-The machine broadcasts on 4 ports (51501-51504). If you wish to access the 
-application externally make sure to allow traffic on these ports.
-
-
-## Machine startup
-
-To setup the machine, run `vagrant up`. The *${INSTALL_DIR}/scripts/bootstrap.sh* script is run as
-the provisioning script.
-
-Login to the machine by typing `vagrant ssh plugins` or `${INSTALL_DIR}/login.sh`.
-
-
-## Cluster status check
-
-Verify that the single-node cluster is ready by typing:
+Verify that the cluster is ready by typing:
 ```bash
 watch -n1 kubectl get pods --all-namespaces
 ```
 
-You should see something similar to the table below. If not, wait for the 
+Something similar to the table below should be displayed. If not, wait for the 
 cluster to properly start.
-
 ```
 NAMESPACE     NAME                              READY     STATUS    RESTARTS   AGE
 kube-system   calico-node-vwvk7                 2/2       Running   0          2m
@@ -57,65 +30,76 @@ kube-system   kube-proxy-78vz6                  1/1       Running   0          2
 kube-system   kube-scheduler-plugins            1/1       Running   0          1m
 ```
 
-## Software installation
+### Argo Workflow Manager
 
-Install the plugins POC by running `${INSTALL_DIR}/scripts/poc-install.sh`.
+Argo Worflow Manager needs to be installed on the cluster. Follow the 
+instructions located at: https://github.com/argoproj/argo/blob/master/demo.md.
 
-Four services are running on the VM:
-* The **Angular frontend** on port **51501**
-* The **Spring backend** on port **51502**
-* The **MongoDB** on port **51503**
-* The **Argo UI** on port **51504**
+### Docker registry
 
-## Plugins installation
+Every Docker image needs to be stored in a registry to be pulled by kubernetes.
 
-Three plugins are provided with this example:
-* The thresholding plugin
-* The convolution plugin
-* The tiled tiff conversion plugin
+To install a localhost registry, run
+```bash
+docker run -dt --name registry -p 5000:5000 registry:2
+```
 
-To add the plugin images to the local registry, run 
-`${INSTALL_DIR}/scripts/plugin-install.sh`.
+Non-HTTPS repositories need to be trusted in */etc/daemon.json* under the \
+`insecure-registries` key as such:
+```json
+{
+  "insecure-registries": ["localhost:5000"]
+}
+```
 
-Go to http://localhost:51501/plugins and enter any of the JSON located in the 
-*plugins* folder to register the plugins.
+Change the *deployment* folder images to pull from the chosen repository.
 
-## Usage
+N.B: In the case of the local registry, a deployment images named **my-image** 
+should be renamed `localhost:5000/my-image` in the *deployment* folder.
 
-During the POC installation, some data have been copied to */home/vagrant/data*.
-This folder contains 2 subfolders:
-* *original* containing 5 regular TIFF images.
-* *tiled* containing the tiled TIFF versions of the *original* images.
+### Port forwarding
 
-Go to http://localhost:51501/workflows to create a new worflow using these 
-images. Keep in mind that:
-* The thresholding plugin can take TIFF or tiled TIFF but only produces TIFF.
-* The convolution plugin needs tiled TIFF as input.
-* The conversion plugin accepts TIFF as input and outputs tiled TIFF.
-* The worflow system can map output from previous steps by starting typing `{{` 
-in the image search bar.
+Several ports need to be open for different services:
+* The **Angular frontend** on port **30101**.
+* The **Spring backend** on port **30201**.
+* The **MongoDB** on port **30202**.
+* An additional port may be forwarded for **Argo UI**.
+
+
+## Installation
+
+The following command will perform the installation of the repository:
+```bash
+git clone https://gitlab.nist.gov/gitlab/wipp/wipp-deploy.git
+cd wipp-deploy
+./scripts/install-wipp.sh
+cd deployment
+./deploy.sh
+```
+
+The WIPP 3.0 is up and running on the cluster, available on port **30101**.
 
 ## Contributions
 
 This repository is using the `git-flow` publishing model. Please refer to
 https://danielkummer.github.io/git-flow-cheatsheet/ for more information.
 
+## Setup specificities
+
+In order for the Spring backend to launch workflows, the argo binary is mounted
+on the container, as well as the Kubernetes credentials. This setup is a 
+temporary insecure fix. A proper communication with the Kubernetes cluster 
+should be setup to ensure cluster security.
+
 ## Troubleshooting
 
-### Machine restart
+### Restart the stack
 
-If the machine is rebooted, the UI and backend will not be restarted. To 
-restart them, run `${INSTALL_DIR}/scripts/restart.sh`
-
-
-### Reset MongoDB
-
-If MongoDB need to be reset, use the following commands:
 ```bash
-docker stop mongo && docker rm mongo
-docker run -dt --name mongo -p 27017:27017 --restart always mongo
+cd wipp-deploy/deployment
+./teardown.sh
+./deploy.sh
 ```
-
 
 ### Argo cleanup
 
