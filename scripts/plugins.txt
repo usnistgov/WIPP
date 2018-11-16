@@ -1,0 +1,3 @@
+wipp-thresholding-plugin
+wipp-convolution-plugin
+wipp-tiledtiffconverter-plugin
