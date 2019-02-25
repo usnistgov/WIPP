@@ -8,10 +8,7 @@ ARG BACKEND_VERSION="3.0.0-SNAPSHOT"
 RUN mkdir -p \
   /opt/nexus-download \
   /opt/wipp/config \
-  /data/plugins/workflows \
-  /data/plugins/jobs_tmp \
-  /data/plugins/coll \
-  /data/plugins/coll_tmp
+  /data/plugins
 
 COPY nexus-download /opt/nexus-download
 
