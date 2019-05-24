@@ -26,7 +26,7 @@ spec:
           name: argo
         - mountPath: /tmp/kubeconfig
           name: config
-        - mountPath: /data/plugins
+        - mountPath: /data/WIPP-plugins
           name: data
         ports:
         - containerPort: 8080
