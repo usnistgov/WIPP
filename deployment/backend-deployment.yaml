@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: backend
-  name: backend
+    io.kompose.service: wipp-backend
+  name: wipp-backend
 spec:
   replicas: 1
   strategy: {}
@@ -15,12 +15,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: backend
+        io.kompose.service: wipp-backend
     spec:
       containers:
       - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_backend:3.0.0-alpha1
-        name: backend
-        args: ["10.0.2.15", "30301"]
+        name: wipp-backend
+        args: ["mongodb", "27017"]
         volumeMounts:
         - mountPath: /usr/local/bin/argo
           name: argo
@@ -42,7 +42,7 @@ spec:
           type: File
       - name: data
         hostPath:
-          path: /data/plugins
+          path: /data/WIPP-plugins
           type: Directory
       restartPolicy: Always
       imagePullSecrets:

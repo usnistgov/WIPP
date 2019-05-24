@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: frontend
-  name: frontend
+    io.kompose.service: wipp-frontend
+  name: wipp-frontend
 spec:
   replicas: 1
   strategy: {}
@@ -15,12 +15,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: frontend
+        io.kompose.service: wipp-frontend
     spec:
       containers:
       - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_frontend:3.0.0-alpha1
-        name: frontend
-        args: ["10.0.2.15", "30201"]
+        name: wipp-frontend
+        args: ["wipp-backend", "8080"]
         ports:
         - containerPort: 80
         resources: {}
