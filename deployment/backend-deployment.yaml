@@ -41,9 +41,8 @@ spec:
           path: /etc/kubernetes/admin.conf
           type: File
       - name: data
-        hostPath:
-          path: /data/WIPP-plugins
-          type: Directory
+        persistentVolumeClaim:
+          claimName: wippdata-pvc
       restartPolicy: Always
       imagePullSecrets:
       - name: regcred
