@@ -18,7 +18,7 @@ spec:
         io.kompose.service: wipp-frontend
     spec:
       containers:
-      - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_frontend:3.0.0-alpha1
+      - image: vm-itl-ssd-201.nist.gov:5000/wipp_dev/wipp_frontend:latest
         name: wipp-frontend
         args: ["wipp-backend", "8080"]
         ports:

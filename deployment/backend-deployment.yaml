@@ -18,7 +18,7 @@ spec:
         io.kompose.service: wipp-backend
     spec:
       containers:
-      - image: vm-itl-ssd-201.nist.gov:5000/wipp/wipp_backend:3.0.0-alpha1
+      - image: vm-itl-ssd-201.nist.gov:5000/wipp_dev/wipp_backend:latest
         name: wipp-backend
         args: ["mongodb", "27017"]
         volumeMounts:
