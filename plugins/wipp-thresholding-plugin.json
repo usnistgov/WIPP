@@ -1,0 +1,76 @@
+{
+	"name": "ThresholdingPlugin",
+	"version": "0.1.3",
+	"title": "Thresholding plugin",
+	"description": "Thresholding methods from ImageJ",
+	"containerId": "wipp/wipp-thresh-plugin:0.1.3",
+
+	"inputs": [
+		{
+			"name": "input",
+			"type": "collection",
+			"options": {
+				"format": "tiledtiff"
+			},
+			"description": "Images inputs for the plugin."
+		},
+		{
+			"name": "thresholdtype",
+			"type": "enum",
+			"options": {
+				"values": [
+					"Manual",
+					"IJDefault",
+					"Huang",
+					"Huang2",
+					"Intermodes",
+					"IsoData",
+					"Li",
+					"MaxEntropy",
+					"Mean",
+					"MinErrorI",
+					"Minimum",
+					"Moments",
+					"Otsu",
+					"Percentile",
+					"RenyiEntropy",
+					"Shanbhag",
+					"Triangle",
+					"Yen"
+				]
+			},
+			"description": "Threshold type for this plugin"
+		},
+		{
+			"name": "thresholdvalue",
+			"type": "number",
+			"required": false,
+			"description": "Threshold value for manual setting"
+		}
+	],
+	"outputs": [
+		{
+			"name": "output",
+			"type": "collection",
+			"options": {
+				"format": "tiff"
+			},
+			"description": "Output data for the plugin"
+		}
+	],
+	"ui": [
+		{
+			"key": "inputs.input",
+			"title": "Image Collection: ",
+			"description": "Pick a collection..."
+		},
+		{
+			"key": "inputs.thresholdtype",
+			"title": "Threshold Type"
+		},
+		{
+			"key": "inputs.thresholdvalue",
+			"condition": "model.inputs.thresholdtype=='Manual'"
+		}
+	]
+}

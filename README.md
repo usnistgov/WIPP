@@ -1,16 +1,15 @@
 # WIPP deployment
 
-Infrastructure to deploy WIPP 3.0 on a single-machine Kubernetes cluster.
+Instructions to deploy WIPP 3.0 on a single-node Kubernetes cluster.
 
 **Disclaimer:** This installation is lacking security features and is not 
-considered stable. Never, ever, use it in production!
+considered stable yet. Alpha version, not production-ready.
 
 ## Prerequisites
 
 ### Kubernetes cluster
 
-A Kubernetes cluster is needed for this install to work properly, following the official
-[instructions](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/).
+A Kubernetes cluster is needed for this install to work properly, following the official [instructions](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/).
 
 Verify that the cluster is ready by typing:
 ```bash
@@ -32,52 +31,40 @@ kube-system   kube-scheduler-plugins            1/1       Running   0          1
 
 ### Argo Workflow Manager
 
-Argo Worflow Manager needs to be installed on the cluster. Follow the 
-instructions located at: https://github.com/argoproj/argo/blob/master/demo.md.
-
-### Docker registry
-
-Every Docker image needs to be stored in a registry to be pulled by kubernetes.
-
-To install a localhost registry, run
-```bash
-docker run -dt --name registry -p 5000:5000 registry:2
-```
-
-Non-HTTPS repositories need to be trusted in */etc/daemon.json* under the \
-`insecure-registries` key as such:
-```json
-{
-  "insecure-registries": ["localhost:5000"]
-}
-```
-
-Change the *deployment* folder images to pull from the chosen repository.
-
-N.B: In the case of the local registry, a deployment images named **my-image** 
-should be renamed `localhost:5000/my-image` in the *deployment* folder.
+We are using [Argo workflows](https://argoproj.github.io/argo/) to manage workflows on a Kubernetes cluster, installation instructions for version 2.2.1 can be found [here](https://github.com/argoproj/argo/blob/release-2.2/demo.md)
 
 ### Port forwarding
 
-Several ports need to be open for different services:
+Several ports are forwarded for different services:
 * The **Angular frontend** on port **30101**.
-* The **Spring backend** on port **30201**.
-* The **MongoDB** on port **30202**.
+* The **Spring REST API backend** on port **30201**.
 * An additional port may be forwarded for **Argo UI**.
 
+### Data storage
+* Data storage is managed using Kubernetes Persistent Volumes (PV) and Persistent Volume Claims (PVC). We provide templates for `hostPath` PV setup (single-node cluster only), see following instructions.
+* Create a `/data/WIPP-plugins` folder on the host for data storage 
+* Create the WIPP data storage Persistent Volume (PV) and Persistent Volume Claim (PVC) in your Kubernetes cluster following the templates for hostPath PV and PVC available in [the deployment folder](deployment/volumes)
+    * `storage` of `capacity` is set to 100Gi by default, this value can be modified in `hostPath-wippdata-volume.yaml` and `hostPath-wippdata-pvc.yaml`
+    * run `hostPath-deploy.sh` to setup the WIPP data PV and PVC
 
 ## Installation
 
-The following command will perform the installation of the repository:
+The following command will perform the installation of the WIPP components:
 ```bash
-git clone https://gitlab.nist.gov/gitlab/wipp/wipp-deploy.git
-cd wipp-deploy
-./scripts/install-wipp.sh
-cd deployment
+git clone https://github.com/usnistgov/WIPP-deploy.git
+cd WIPP-deploy/deployment
 ./deploy.sh
 ```
 
 The WIPP 3.0 is up and running on the cluster, available on port **30101**.
+
+**Note**: The Docker images referenced in the WIPP Deployment specs are NIST internal images for alpha-testing, not released to the public yet. For a deployment outside of NIST, the WIPP-backend and WIPP-frontend images should be built and their names (*[REPOSITORY[:TAG]]*) should be referenced in the Deployment specs.
+* WIPP-backend repository: https://github.com/usnistgov/WIPP-backend
+* WIPP-frontend repository: https://github.com/usnistgov/WIPP-frontend
+
+## WIPP plugins
+
+Manifest files to install the currently available WIPP plugins can be found in the [plugins folder](plugins)
 
 ## Contributions
 
@@ -86,17 +73,14 @@ https://danielkummer.github.io/git-flow-cheatsheet/ for more information.
 
 ## Setup specificities
 
-In order for the Spring backend to launch workflows, the argo binary is mounted
-on the container, as well as the Kubernetes credentials. This setup is a 
-temporary insecure fix. A proper communication with the Kubernetes cluster 
-should be setup to ensure cluster security.
+In order for the Spring backend to launch workflows, the argo binary is mounted on the container, as well as the Kubernetes credentials. This setup is a temporary insecure fix. A proper communication with the Kubernetes cluster should be setup to ensure cluster security.
 
 ## Troubleshooting
 
 ### Restart the stack
 
 ```bash
-cd wipp-deploy/deployment
+cd WIPP-deploy/deployment
 ./teardown.sh
 ./deploy.sh
 ```

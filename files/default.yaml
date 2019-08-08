@@ -1,9 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Workflow
-spec:
-  entrypoint: workflow
-  volumes:
-    - name: data-volume
-      hostPath:
-        path: /home/vagrant/data/
-        type: Directory

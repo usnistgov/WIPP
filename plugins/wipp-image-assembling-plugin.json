@@ -1,0 +1,45 @@
+{
+	"name": "WIPP Image assembling plugin",
+	"version": "0.0.1",
+	"title": "WIPP Image assembling",
+	"description": "Image assembling using NIST pyramidio",
+    "creator": "National Institute of Standards and Technology",
+	"containerId": "wipp/wipp-image-assembling-plugin:0.0.1",
+
+	"inputs": [
+		{
+			"name": "inputImages",
+			"type": "collection",
+            "options": {
+				"format": "tiledtiff"
+			},
+			"description": "Input Images",
+            "required": true
+		},
+        {
+			"name": "inputStitchingVector",
+			"type": "stitchingVector",
+			"description": "Input Stitching Vector",
+            "required": true
+		}
+    ],
+	"outputs": [
+		{
+			"name": "output",
+			"type": "collection",
+			"description": "Output assembled image"
+		}
+	],
+	"ui": [
+		{
+			"key": "inputs.inputImages",
+			"title": "Input Images: ",
+			"description": "Pick a collection..."
+		},
+        {
+			"key": "inputs.inputStitchingVector",
+			"title": "Input Stitching Vector: ",
+			"description": "Pick a stitching vector..."
+		}
+    ]
+}

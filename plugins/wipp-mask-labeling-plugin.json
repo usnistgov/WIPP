@@ -1,0 +1,50 @@
+{
+	"name": "WIPP Mask labeling plugin",
+	"version": "0.0.1",
+	"title": "WIPP Mask labeling",
+	"description": "Mask labeling using NIST connected components algorithm",
+    "creator": "National Institute of Standards and Technology",
+	"containerId": "wipp/wipp-mask-labeling-plugin:0.0.1",
+
+	"inputs": [
+		{
+			"name": "inputImages",
+			"type": "collection",
+            "options": {
+				"format": "tiledtiff"
+			},
+			"description": "Input Images",
+            "required": true
+		},
+        {
+			"name": "connectedness",
+			"type": "enum",
+			"options": {
+					"values": [
+						"FOUR_CONNECTED",
+						"EIGHT_CONNECTED"
+					]
+			},
+			"description": "Connectedness",
+            "required": true
+		}
+    ],
+	"outputs": [
+		{
+			"name": "output",
+			"type": "collection",
+			"description": "Output labeled mask"
+		}
+	],
+	"ui": [
+		{
+			"key": "inputs.inputImages",
+			"title": "Input Images: ",
+			"description": "Pick a collection..."
+		},
+        {
+			"key": "inputs.connectedness",
+			"title": "Connectedness: "
+		}
+    ]
+}

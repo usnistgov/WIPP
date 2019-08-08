@@ -1,3 +1,0 @@
-{
-  "insecure-registries": ["@CICD_ADDR@:@NEXUS_DOCKER_PORT@"]
-}
