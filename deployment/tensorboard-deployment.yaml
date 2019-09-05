@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: wipp-tensorboard
+  name: wipp-tensorboard
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: wipp-tensorboard
+    spec:
+      containers:
+      - image: tensorflow/tensorflow:2.0.0b1-py3
+        name: wipp-tensorboard
+        command: ["tensorboard"]
+        args: ["--logdir=/data/WIPP-plugins/tensorboard-logs"]
+        volumeMounts:
+        - mountPath: /data/WIPP-plugins
+          name: data
+          readOnly: true
+        ports:
+        - containerPort: 6006
+        resources: {}
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: wippdata-pvc
+      restartPolicy: Always
+status: {}
