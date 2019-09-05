@@ -20,7 +20,7 @@ spec:
       containers:
       - image: vm-itl-ssd-201.nist.gov:5000/wipp_dev/wipp_frontend:latest
         name: wipp-frontend
-        args: ["wipp-backend", "8080"]
+        args: ["wipp-backend", "8080", "wipp-tensorboard", "6006"]
         ports:
         - containerPort: 80
         resources: {}

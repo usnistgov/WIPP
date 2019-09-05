@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: wipp-tensorboard
+  name: wipp-tensorboard
+spec:
+  type: NodePort
+  ports:
+  - name: "6006"
+    port: 6006
+    targetPort: 6006
+    nodePort: 30601
+  selector:
+    io.kompose.service: wipp-tensorboard
+status:
+  loadBalancer: {}
