@@ -1,0 +1,74 @@
+{
+    "name": "EGTSegmentationPlugin",
+    "version": "1.0.3",
+    "title": "EGTSegmentation plugin",
+    "description": "Efficient EGT Segmentation (C++)",
+    "containerId": "wipp/wipp-egt-plugin:1.0.3",
+    "inputs": [{
+            "name": "images",
+            "type": "collection",
+            "required": "true",
+            "description": "Images : Collections of partial Fields Of View (FOVs)."
+        },
+        {
+            "name": "minhole",
+            "type": "number",
+            "required": "false",
+            "description": "Minimum Hole Size"
+        },
+        {
+            "name": "minobject",
+            "type": "number",
+            "required": "false",
+            "description": "Minimum Object Size"
+        },
+        {
+            "name": "depth",
+            "type": "enum",
+            "options": {
+                "values": [
+                    "8U",
+                    "16U"
+                ]
+            },
+            "required": "false",
+            "description": "Image Depth : The format is which each pixel is encoded in the input."
+        },
+        {
+            "name": "label",
+            "type": "boolean",
+            "required": "false",
+            "description": "Generate a Labeled Mask"
+        }
+    ],
+    "outputs": [{
+        "name": "output",
+        "type": "collection",
+        "description": "Output collection"
+    }],
+    "ui": [{
+            "key": "inputs.images",
+            "title": "Input Images: ",
+            "description": "Pick a collection..."
+        },
+        {
+            "key": "inputs.minhole",
+            "title": "Minimum Hole Size: ",
+            "description": "Pick a Minimum Hole Size..."
+        },
+        {
+            "key": "inputs.minobject",
+            "title": "Minimum Object Size: ",
+            "description": "Pick a Minimum Object Size..."
+        },
+        {
+            "key": "inputs.depth",
+            "title": "Image Depth"
+        },
+        {
+            "key": "inputs.label",
+            "title": "Generate Labeled Masks instead of Binary Masks: ",
+            "description": "Pick an option..."
+        }
+    ]
+}
