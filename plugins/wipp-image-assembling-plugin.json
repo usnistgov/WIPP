@@ -1,10 +1,10 @@
 {
 	"name": "WIPP Image assembling plugin",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"title": "WIPP Image assembling",
 	"description": "Image assembling using NIST pyramidio",
     "creator": "National Institute of Standards and Technology",
-	"containerId": "wipp/wipp-image-assembling-plugin:0.0.1",
+	"containerId": "wipp/wipp-image-assembling-plugin:0.0.2",
 
 	"inputs": [
 		{
