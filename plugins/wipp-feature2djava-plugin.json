@@ -1,0 +1,143 @@
+{
+  "name": "WIPP Feature2DJava Plugin",
+  "version": "1.4.0-t6",
+  "title": "WIPP Feature2DJava Plugin",
+  "description": "WIPP 2D Grayscale Image Feature Extraction (Java)",
+  "containerId": "wipp/wipp-feature2djava-plugin:1.4.0",
+  "inputs": [
+    {
+      "name": "imageDir",
+      "type": "collection",
+      "required": "true",
+      "description": "Images images (raw)"
+    },
+    {
+      "name": "partitionsDir",
+      "type": "collection",
+      "required": "false",
+      "description": "Images partitions (masks)"
+    },
+    {
+      "name": "iP",
+      "type": "string",
+      "required": "true",
+      "description": "Image names pattern (regular expression)"
+    },
+    {
+      "name": "pP",
+      "type": "string",
+      "required": "false",
+      "description": "Mask names pattern (regular expression)"
+    },
+    {
+      "name": "features",
+      "type": "array",
+      "options": {
+        "items": { 
+            "type": "string", 
+            "title": "Select feature",
+            "oneOf": 
+                [
+                    { "description": "Area", "enum": [ "Feature2DJava_Area" ] }, 
+                    { "description": "Mean", "enum": [ "Feature2DJava_Mean" ] }, 
+                    { "description": "Aspect Ratio BB", "enum": [ "Feature2DJava_Aspect_Ratio_BB" ] }, 
+                    { "description": "Bounding Box", "enum": [ "Feature2DJava_Bounding_Box" ] }, 
+                    { "description": "Center BB", "enum": [ "Feature2DJava_Center_BB" ] }, 
+                    { "description": "Centroid", "enum": [ "Feature2DJava_Centroid" ] }, 
+                    { "description": "Circularity", "enum": [ "Feature2DJava_Circularity" ] }, 
+                    { "description": "Distance From Border", "enum": [ "Feature2DJava_Distance_From_Border" ] }, 
+                    { "description": "Eccentricity", "enum": [ "Feature2DJava_Eccentricity" ] }, 
+                    { "description": "Entropy", "enum": [ "Feature2DJava_Entropy" ] }, 
+                    { "description": "ExtendBB", "enum": [ "Feature2DJava_ExtendBB" ] }, 
+                    { "description": "Mean", "enum": [ "Feature2DJava_Mean" ] }, 
+                    { "description": "Median", "enum": [ "Feature2DJava_Median" ] }, 
+                    { "description": "Mode", "enum": [ "Feature2DJava_Mode" ] },
+                    { "description": "Orientation", "enum": [ "Feature2DJava_Orientation" ] },
+                    { "description": "Perimeter", "enum": [ "Feature2DJava_Perimeter" ] },
+                    { "description": "StandardDeviation", "enum": [ "Feature2DJava_StandardDeviation" ] },
+                    { "description": "Skewness", "enum": [ "Feature2DJava_Skewness" ] },
+                    { "description": "Kurtosis", "enum": [ "Feature2DJava_Kurtosis" ] },
+                    { "description": "Hyperskewness", "enum": [ "Feature2DJava_Hyperskewness" ] },
+                    { "description": "Hyperflatness", "enum": [ "Feature2DJava_Hyperflatness" ] },
+                    { "description": "TContrast", "enum": [ "Feature2DJava_TContrast" ] },
+                    { "description": "TCorrelation", "enum": [ "Feature2DJava_TCorrelation" ] },
+                    { "description": "THomogeneity", "enum": [ "Feature2DJava_THomogeneity" ] },
+                    { "description": "TEnergy", "enum": [ "Feature2DJava_TEnergy" ] },
+                    { "description": "TVariance", "enum": [ "Feature2DJava_TVariance" ] },
+                    { "description": "TEntropy", "enum": [ "Feature2DJava_TEntropy" ] },
+                    { "description": "TInvDiffMoment", "enum": [ "Feature2DJava_TInvDiffMoment" ] },
+                    { "description": "TSumAverage", "enum": [ "Feature2DJava_TSumAverage" ] },
+                    { "description": "TSumVariance", "enum": [ "Feature2DJava_TSumVariance" ] },
+                    { "description": "TSumEntropy", "enum": [ "Feature2DJava_TSumEntropy" ] },
+                    { "description": "TDiffAverage", "enum": [ "Feature2DJava_TDiffAverage" ] },
+                    { "description": "TDiffVariance", "enum": [ "Feature2DJava_TDiffVariance" ] },
+                    { "description": "TDiffEntropy", "enum": [ "Feature2DJava_TDiffEntropy" ] }
+                ], 
+            "default": "Feature2DJava_Area",
+            "widget": "select" ,    
+            "minItems": 1, 
+            "uniqueItems": "true"
+        },
+      "required": "true",
+      "description": "Image Depth : The format is which each pixel is encoded in the input."
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "name": "outputDir",
+      "type": "csvCollection",
+      "description": "Output CSV files"
+    }
+  ],
+  "ui": [
+    {
+      "key": "inputs.imageDir",
+      "title": "Input Images: ",
+      "description": "Pick a collection..."
+    },
+    {
+      "key": "inputs.partitionsDir",
+      "title": "Input Partitions (masks): ",
+      "description": "Pick a collection..."
+    },
+    {
+      "key": "inputs.iP",
+      "title": "Image names pattern (regular expression): ",
+      "description": "Filename pattern..."
+    },{
+      "key": "inputs.pP",
+      "title": "Mask names pattern (regular expression): ",
+      "description": "Filename pattern..."
+    },
+    {
+      "key": "inputs.features",
+      "title": "Features to extract"
+    },
+    {
+        "key" : "fieldsets",
+        "fieldsets": [
+            {
+              "title": "Input images",
+              "fields": [
+                "imageDir",
+                "iP"
+              ]
+            },
+            {
+              "title": "Input masks",
+              "fields": [
+                "partitionsDir",
+                "pP"
+              ]
+            },
+            {
+              "title": "Features",
+              "fields": [
+                "features"
+              ]
+            }
+        ]
+    }
+  ]
+}
