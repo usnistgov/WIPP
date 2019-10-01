@@ -1,10 +1,10 @@
 {
 	"name": "MIST",
-	"version": "2.0.5",
+	"version": "2.0.7",
 	"title": "MIST plugin",
 	"description": "Microscopy Image Stitching Tool",
     "creator": "National Institute of Standards and Technology",
-	"containerId": "wipp/mist:2.0.5",
+	"containerId": "wipp/mist:2.0.7",
 
 	"inputs": [
 		{
@@ -137,6 +137,18 @@
 			"type": "string",
 			"description": "Timeslices"
 		},
+		{
+	      "name": "assembleNoOverlap",
+	      "type": "enum",
+				"options": {
+					"values": [
+						"False",
+	                    "True"
+					]
+				},
+	      "description": "Whether or not to assemble images without overlap.",
+	      "required": true
+	    },
         {
 			"name": "stageRepeatability",
 			"type": "number",
@@ -184,6 +196,11 @@
 	],
 	"ui": [
 		{
+	      "key": "inputs.assembleNoOverlap",
+	      "title": "Assemble No Overlap: ",
+	      "description": "Whether or not to assemble images with no overlap."
+	    },
+    	{
 			"key": "inputs.imageDir",
 			"title": "Input Images: ",
 			"description": "Pick a collection..."
@@ -281,30 +298,35 @@
 			"key": "inputs.stageRepeatability",
 			"title": "Stage Repeatability: ",
 			"description": "Specify the stage repeatability variable used when computing the global optimization",
-            "default": 0
+            "default": 0,
+            "condition": "model.inputs.assembleNoOverlap=='False'"
 		},
         {
 			"key": "inputs.horizontalOverlap",
 			"title": "Horizontal Overlap: ",
-			"description": "Specify the horizontal overlap variable used when computing the global optimization"
+			"description": "Specify the horizontal overlap variable used when computing the global optimization",
+            "condition": "model.inputs.assembleNoOverlap=='False'"
 		},
         {
 			"key": "inputs.verticalOverlap",
 			"title": "Vertical Overlap: ",
-			"description": "Specify the vertical overlap variable when computing the global optimization"
+			"description": "Specify the vertical overlap variable when computing the global optimization",
+            "condition": "model.inputs.assembleNoOverlap=='False'"
 		},
         {
 			"key": "inputs.overlapUncertainty",
 			"title": "Overlap Uncertainty: ",
 			"description": "Specify the overlap uncertainty variable when computing the global optimization",
-             "default": 5
+             "default": 5,
+            "condition": "model.inputs.assembleNoOverlap=='False'"
 		},
         
         
         {
 			"key": "inputs.programType",
 			"title": "Stitching Program: ",
-			"description": "Select which type of program to execute."
+			"description": "Select which type of program to execute.",
+            "condition": "model.inputs.assembleNoOverlap=='False'"
 		},
         {
             "key" : "fieldsets",
@@ -312,6 +334,7 @@
                 {
                   "title": "Input images",
                   "fields": [
+                  	"assembleNoOverlap",
                     "imageDir",
                     "filenamePatternType",
                     "filenamePattern"
