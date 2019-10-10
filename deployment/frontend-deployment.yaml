@@ -21,6 +21,15 @@ spec:
       - image: vm-itl-ssd-201.nist.gov:5000/wipp_dev/wipp_frontend:latest
         name: wipp-frontend
         args: ["wipp-backend", "8080"]
+        env:
+        - name: ARGOUIBASE_URL
+          value: ARGOUIBASE_URL_VALUE
+        - name: TENSORBOARD_URL
+          value: TENSORBOARD_URL_VALUE
+        - name: JUPYTERHUB_URL
+          value: JUPYTERHUB_URL_VALUE
+        - name: VISIONUI_URL
+            value: VISIONUI_URL_VALUE
         ports:
         - containerPort: 80
         resources: {}
