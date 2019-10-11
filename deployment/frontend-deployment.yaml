@@ -29,7 +29,7 @@ spec:
         - name: JUPYTERHUB_URL
           value: JUPYTERHUB_URL_VALUE
         - name: VISIONUI_URL
-            value: VISIONUI_URL_VALUE
+          value: VISIONUI_URL_VALUE
         ports:
         - containerPort: 80
         resources: {}
