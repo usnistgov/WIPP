@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -9,13 +9,16 @@ metadata:
     io.kompose.service: mongodb
   name: mongodb
 spec:
+  selector:
+    matchLabels:
+      app: mongodb
   replicas: 1
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: mongodb
+        app: mongodb
     spec:
       containers:
       - image: mongo:3.6

@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
@@ -9,13 +9,16 @@ metadata:
     io.kompose.service: wipp-tensorboard
   name: wipp-tensorboard
 spec:
+  selector:
+    matchLabels:
+      app: wipp-tensorboard
   replicas: 1
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: wipp-tensorboard
+        app: wipp-tensorboard
     spec:
       containers:
       - image: tensorflow/tensorflow:2.0.0b1-py3
