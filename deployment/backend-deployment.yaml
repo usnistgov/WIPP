@@ -54,12 +54,12 @@ spec:
     spec:
       serviceAccountName: wipp-backend-sa
       containers:
-      - image: vm-itl-ssd-201.nist.gov:5000/wipp_dev/wipp_backend:latest
+      - image: WIPP_BACKEND_IMAGE
         name: wipp-backend
         args: ["mongodb", "27017", "wippdata-pvc"]
         env:
             - name: ELASTIC_APM_SERVER_URLS
-              value: http://vm-itl-ssd-205.nist.gov:8200
+              value: ELASTIC_APM_SERVER_URLS_VALUE
             - name: ELASTIC_APM_SERVICE_NAME
               value: wipp-backend
             - name: ELASTIC_APM_APPLICATION_PACKAGES

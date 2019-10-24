@@ -21,7 +21,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: vm-itl-ssd-201.nist.gov:5000/wipp_dev/wipp_frontend:latest
+      - image: WIPP_FRONTEND_IMAGE
         name: wipp-frontend
         args: ["wipp-backend", "8080"]
         env:
