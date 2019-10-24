@@ -6,7 +6,7 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: wipp-frontend
+    service: wipp-frontend
   name: wipp-frontend
 spec:
   type: NodePort
@@ -16,6 +16,6 @@ spec:
     targetPort: 80
     nodePort: 30101
   selector:
-    io.kompose.service: wipp-frontend
+    app: wipp-frontend
 status:
   loadBalancer: {}

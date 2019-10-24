@@ -6,7 +6,7 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: wipp-tensorboard
+    service: wipp-tensorboard
   name: wipp-tensorboard
 spec:
   type: NodePort
@@ -16,6 +16,6 @@ spec:
     targetPort: 6006
     nodePort: 30601
   selector:
-    io.kompose.service: wipp-tensorboard
+    app: wipp-tensorboard
 status:
   loadBalancer: {}
