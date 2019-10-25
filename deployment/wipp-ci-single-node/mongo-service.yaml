@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.16.0 (0c01309)
+  creationTimestamp: null
+  labels:
+    service: mongodb
+  name: mongodb
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+  selector:
+    app: mongodb
+status:
+  loadBalancer: {}
