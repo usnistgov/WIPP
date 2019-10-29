@@ -1,10 +1,12 @@
-*Landing page for single-node deployment instructions - WIPP Complete deployment*
+# WIPP Deployment on a single-node cluster - Complete installation
 
 WIPP relies on Kubernetes (k8s) to run. If you have Kubernetes cluster available or know how to create one, just use the command below to deploy WIPP applications:
 
 ```
 kubectl apply -f wipp-single-node.yaml
 ```
+
+## Installation
 
 If you do not have Kubernetes cluster or don't know how to create one, follow the instructions below for popular operating systems to get the working local WIPP installation on your computer:
 
@@ -14,7 +16,7 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 - [Windows 10 (Multipass+microk8s)](#Windows-10-(Multipass+microk8s))
 
 
-## macOS (with Docker Desktop)
+### macOS (with Docker Desktop)
 
 1. Download and install Docker Desktop. Follow instructions here: https://docs.docker.com/docker-for-mac/install/ You will need to create free Docker ID to get access to .dmg download
 2. Once installed, click on the Docker logo and choose **Preferences** → **Advanced**. Depending on your Mac configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP (and all Docker containers).
@@ -33,7 +35,7 @@ kubectl apply -f wipp-single-node.yaml
    * Plots: x.x.x.x:32004
 
 
-## macOS (with Multipass+microk8s)
+### macOS (with Multipass+microk8s)
 
 1. Download and install Multipass for Mac: https://multipass.run/#install Multipass creates on-demand Linux VMs and provides an easy way to run Kubernetes using microk8s. 
 2. Once installed, open the terminal and create VM:
@@ -73,7 +75,7 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-microk8s.yaml
    * Plots: x.x.x.x:32004
 
 
-## Linux (Multipass+microk8s)
+### Linux (Multipass+microk8s)
 
 1. Install Multipass from Snap Store:
 ```
@@ -113,7 +115,7 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-microk8s.yaml
    * Plots: x.x.x.x:32004
 
 
-## Windows 10 (Multipass+microk8s)
+### Windows 10 (Multipass+microk8s)
 Make sure you have Windows 10 Pro, Enterprise or Education; Windows 10 Home is not supported.
 
 1. Download and install Multipass for Windows: https://multipass.run/#install Multipass creates on-demand Linux VMs and provides an easy way to run Kubernetes using microk8s. 
@@ -146,3 +148,33 @@ Copy the IP address `x.x.x.x`.
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
+
+## Teardown
+
+There are couple of important considerations to keep in mind. If you perform the full teardown, all the data generated or uploaded in any of the apps (WIPP, Notebooks, Plots) **will be lost**. It is possible to do a partial teardown when only the apps are deleted but all the data persist, so you can reinstall WIPP again in the future and continue to use it in the state you left it in. If you would like to delete WIPP from your computer, follow the instructions below:
+
+- [when using Docker for Mac](#Teardown-in-Docker-Desktop)
+- [when using Multipass+microk8s](#Teardown-in-Multipass)
+
+#### Teardown in Docker Desktop
+
+1. Delete all resources created by WIPP (deployments, services, storage, etc.):
+```
+kubectl delete -f wipp-single-node.yaml
+```
+2. (OPTIONAL) Turn of Kubernetes cluster in Docker settings. In  Docker menu go to **Preferences** → **Kubernetes** and uncheck **Enable Kubernetes**.
+3. (OPTIONAL) For complete teardown, you can delete Docker Desktop
+
+#### Teardown in Multipass
+
+1. Delete all resources created by WIPP (deployments, services, storage, etc.):
+```
+kubectl --kubeconfig=kubeconfig delete -f wipp-microk8s.yaml
+```
+2. (OPTIONAL) Delete Multipass VM:
+```
+multipass stop wipp
+multipass delete wipp
+multipass purge
+```
+3. (OPTIONAL) Delete Multipass from your computer
