@@ -1,0 +1,14 @@
+# Plots Frontend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-ui
+spec:
+  type: NodePort
+  ports: 
+  - port: 80
+    nodePort: 32004
+    targetPort: nginx
+  selector:
+    app: vision-ui
+---

@@ -1,0 +1,22 @@
+### Run a job to fix permissions to allow integration with Notebooks
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fix-permissions
+spec:
+  template:
+    spec:
+      containers:
+      - name: fix-wipp-permissions
+        image: busybox
+        command: [ "sh", "-c", "chown 1000:1000 /opt/claim/temp" ]
+        volumeMounts:
+          - name: volume
+            mountPath: /opt/claim
+      volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: wipp-pv-claim
+      restartPolicy: Never
+  backoffLimit: 4
+---

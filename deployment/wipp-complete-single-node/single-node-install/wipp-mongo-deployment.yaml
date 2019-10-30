@@ -1,0 +1,42 @@
+# PVC for MongoDB
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pv-claim
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+# WIPP MongoDB Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - image: mongo:3.6
+        name: mongodb
+        volumeMounts:
+        - mountPath: /data/db
+          name: dbdata
+          subPath: db
+        ports:
+        - containerPort: 27017
+      volumes:
+      - name: dbdata
+        persistentVolumeClaim:
+          claimName: mongo-pv-claim
+      restartPolicy: Always
+---
