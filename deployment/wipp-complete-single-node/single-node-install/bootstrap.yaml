@@ -9,7 +9,7 @@ spec:
       containers:
       - name: fix-wipp-permissions
         image: busybox
-        command: [ "sh", "-c", "chown 1000:1000 /opt/claim/temp" ]
+        command: [ "sh", "-c", "chown 1000:1000 /opt/claim/" ]
         volumeMounts:
           - name: volume
             mountPath: /opt/claim
