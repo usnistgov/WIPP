@@ -19,12 +19,12 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 
 Kubernetes require to specify the volume size before deploying apps. `wipp-single-node.yaml` contains some reasonable defaults for testing WIPP on a single computer/laptop, which you might want to change to better suit your case. Below is the list of volumes with default size and reference to config, so you can change them before deploying.
 
-| Volume name                                                                                    | Purpose                                    | Default size |
-|------------------------------------------------------------------------------------------------|--------------------------------------------|--------------|
-| [`mongo-pv-claim`](/../../deployment/wipp-complete-single-node/wipp-single-node.yaml#L154)     | MongoDB database for WIPP                  | 1Gi          |
-| [`wipp-pv-claim`](/../../deployment/wipp-complete-single-node/wipp-single-node.yaml#L554)      | WIPP storage for images and data           | 20Gi         |
-| [`notebooks-pv-claim`](/../../deployment/wipp-complete-single-node/wipp-single-node.yaml#L989) | Shared storage for all Notebook users      | 5Gi          |
-| [`claim-{username}`](/../../deployment/wipp-complete-single-node/wipp-single-node.yaml#L532)   | Individual storage for each Notebook users | 1Gi          |
+| Volume name                                         | Purpose                                    | Default size |
+|-----------------------------------------------------|--------------------------------------------|--------------|
+| [`mongo-pv-claim`](wipp-single-node.yaml#L154)     | MongoDB database for WIPP                  | 1Gi          |
+| [`wipp-pv-claim`](wipp-single-node.yaml#L554)      | WIPP storage for images and data           | 20Gi         |
+| [`notebooks-pv-claim`](wipp-single-node.yaml#L989) | Shared storage for all Notebook users      | 5Gi          |
+| [`claim-{username}`](wipp-single-node.yaml#L532)   | Individual storage for each Notebook users | 1Gi          |
 
 ### macOS (with Docker Desktop)
 
