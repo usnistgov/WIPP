@@ -15,6 +15,16 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 - [Linux (Multipass+microk8s)](#Linux-(Multipass+microk8s))
 - [Windows 10 (Multipass+microk8s)](#Windows-10-(Multipass+microk8s))
 
+### Volume size considerations
+
+Kubernetes require to specify the volume size before deploying apps. `wipp-single-node.yaml` contains some reasonable defaults for testing WIPP on a single computer/laptop, which you might want to change to better suit your case. Below is the list of volumes with default size and reference to config, so you can change them before deploying.
+
+| Volume name          | Purpose                                    | Default size |
+|----------------------|--------------------------------------------|--------------|
+| `mongo-pv-claim`     | MongoDB database for WIPP                  | 1Gi          |
+| `wipp-pv-claim`      | WIPP storage for images and data           | 20Gi         |
+| `notebooks-pv-claim` | Shared storage for all Notebook users      | 5Gi          |
+| `claim-{username}`   | Individual storage for each Notebook users | 1Gi          |
 
 ### macOS (with Docker Desktop)
 
@@ -47,7 +57,7 @@ multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
 Depending on your Mac configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
 3. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update && sudo apt install docker.io
+multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
@@ -66,7 +76,7 @@ multipass info wipp | grep IP
 6. Copy the Kubernetes config and deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 ```
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
-kubectl --kubeconfig=kubeconfig apply -f wipp-microk8s.yaml
+kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
 7. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
@@ -106,7 +116,7 @@ multipass info wipp | grep IP
 6. Copy the Kubernetes config and deploy WIPP:
 ```
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
-kubectl --kubeconfig=kubeconfig apply -f wipp-microk8s.yaml
+kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
 7. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
@@ -125,25 +135,36 @@ Make sure you have Windows 10 Pro, Enterprise or Education; Windows 10 Home is n
 multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
 ```
 Depending on your PC configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
-
-4. Print the Kubernetes config:
+4. Install and start microk8s:
+```
+multipass exec wipp -- sudo apt update
+multipass exec wipp -- sudo apt install docker.io
+multipass exec wipp -- sudo snap install microk8s --classic
+multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
+multipass exec wipp -- sudo usermod -a -G microk8s multipass
+multipass exec wipp -- /snap/bin/microk8s.start
+multipass exec wipp -- /snap/bin/microk8s.enable rbac
+multipass exec wipp -- /snap/bin/microk8s.enable dns
+multipass exec wipp -- /snap/bin/microk8s.enable storage
+```
+5. Print the Kubernetes config:
 ```
 multipass exec wipp -- /snap/bin/microk8s.config
 ```
 Copy the output of the command to `kubeconfig` file.
-5. Find the IP of Multipass VM:
+6. Find the IP of Multipass VM:
 ```
 multipass info wipp
 ```
 Copy the IP address `x.x.x.x`.
 
-6. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
+7. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
 
-7. Deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/):
+8. Deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/):
 ```
-.\kubectl.exe --kubeconfig=kubeconfig apply -f wipp-microk8s.yaml
+.\kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
-8. In browser, access the apps at the following addresses:
+9. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
