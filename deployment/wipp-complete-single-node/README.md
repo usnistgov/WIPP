@@ -43,6 +43,7 @@ kubectl apply -f wipp-single-node.yaml
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
+   * Tensorboard: x.x.x.x:32005
 
 
 ### macOS (with Multipass+microk8s)
@@ -83,6 +84,7 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
+   * Tensorboard: x.x.x.x:32005
 
 
 ### Linux (Multipass+microk8s)
@@ -123,6 +125,7 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
+   * Tensorboard: x.x.x.x:32005
 
 
 ### Windows 10 (Multipass+microk8s)
@@ -169,6 +172,7 @@ Copy the IP address `x.x.x.x`.
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
+   * Tensorboard: x.x.x.x:32005
 
 ## Teardown
 

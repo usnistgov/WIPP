@@ -1167,6 +1167,54 @@ spec:
   selector:
     app: vision-ui
 ---
+# WIPP-Tensorboard Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wipp-tensorboard
+spec:
+  selector:
+    matchLabels:
+      app: wipp-tensorboard
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wipp-tensorboard
+    spec:
+      containers:
+      - image: tensorflow/tensorflow:2.0.0b1-py3
+        name: wipp-tensorboard
+        command: ["tensorboard"]
+        args: ["--logdir=/data/WIPP-plugins/tensorboard-logs"]
+        volumeMounts:
+        - mountPath: /data/WIPP-plugins
+          name: data
+          readOnly: true
+        ports:
+        - containerPort: 6006
+        resources: {}
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: wipp-pv-claim
+      restartPolicy: Always
+---
+# WIPP-Tensorboard Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: wipp-tensorboard
+spec:
+  type: NodePort
+  ports:
+  - name: "6006"
+    port: 6006
+    targetPort: 6006
+    nodePort: 32005
+  selector:
+    app: wipp-tensorboard
+---
 ### Run a job to fix permissions to allow integration with Notebooks
 apiVersion: batch/v1
 kind: Job
