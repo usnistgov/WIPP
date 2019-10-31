@@ -72,6 +72,4 @@ spec:
           persistentVolumeClaim:
             claimName: wipp-pv-claim
       restartPolicy: Always
-      imagePullSecrets:
-        - name: labshare-docker
 ---

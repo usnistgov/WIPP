@@ -32,8 +32,6 @@ spec:
         volumeMounts:
         - name: shared-data
           mountPath: /data/wipp
-      imagePullSecrets:
-      - name: labshare-docker
       volumes:
       - name: shared-data
         persistentVolumeClaim:

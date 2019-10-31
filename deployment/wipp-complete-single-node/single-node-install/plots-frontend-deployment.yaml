@@ -25,6 +25,4 @@ spec:
         env:
         - name: VISION_API_URL
           value: "http://localhost:32011/"
-      imagePullSecrets:
-      - name: labshare-docker
 ---

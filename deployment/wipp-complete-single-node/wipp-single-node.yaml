@@ -72,8 +72,6 @@ spec:
           persistentVolumeClaim:
             claimName: wipp-pv-claim
       restartPolicy: Always
-      imagePullSecrets:
-        - name: labshare-docker
 ---
 # WIPP-Backend Service
 apiVersion: v1
@@ -124,8 +122,6 @@ spec:
         ports:
         - containerPort: 80
       restartPolicy: Always
-      imagePullSecrets:
-      - name: labshare-docker
 ---
 # WIPP Frontend Service
 apiVersion: v1
@@ -402,10 +398,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: workflow-controller-configmap
-  namespace: argo
-data:
-  config: |
-    containerRuntimeExecutor: pns
 ---
 apiVersion: v1
 kind: Service
@@ -448,7 +440,7 @@ spec:
           value: "false"
         - name: BASE_HREF
           value: /
-        image: argoproj/argoui:v2.2.1
+        image: argoproj/argoui:v2.3.0
         name: argo-ui
       serviceAccountName: argo-ui
 ---
@@ -471,10 +463,10 @@ spec:
         - --configmap
         - workflow-controller-configmap
         - --executor-image
-        - argoproj/argoexec:v2.2.1
+        - argoproj/argoexec:v2.3.0
         command:
         - workflow-controller
-        image: argoproj/workflow-controller:v2.2.1
+        image: argoproj/workflow-controller:v2.3.0
         name: workflow-controller
       serviceAccountName: argo
 ---
@@ -1114,8 +1106,6 @@ spec:
         volumeMounts:
         - name: shared-data
           mountPath: /data/wipp
-      imagePullSecrets:
-      - name: labshare-docker
       volumes:
       - name: shared-data
         persistentVolumeClaim:
@@ -1162,8 +1152,6 @@ spec:
         env:
         - name: VISION_API_URL
           value: "http://localhost:32011/"
-      imagePullSecrets:
-      - name: labshare-docker
 ---
 # Plots Frontend Service
 apiVersion: v1
