@@ -1,0 +1,15 @@
+# WIPP-Tensorboard Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: wipp-tensorboard
+spec:
+  type: NodePort
+  ports:
+  - name: "6006"
+    port: 6006
+    targetPort: 6006
+    nodePort: 32005
+  selector:
+    app: wipp-tensorboard
+---

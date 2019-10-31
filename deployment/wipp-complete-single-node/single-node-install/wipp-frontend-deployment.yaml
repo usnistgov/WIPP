@@ -25,6 +25,8 @@ spec:
           value: "http://localhost:32003"
         - name: VISIONUI_URL
           value: "http://localhost:32004"
+        - name: TENSORBOARD_URL
+          value: "http://localhost:32005"
         ports:
         - containerPort: 80
       restartPolicy: Always
