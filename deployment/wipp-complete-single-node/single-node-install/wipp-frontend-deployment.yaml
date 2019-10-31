@@ -1,0 +1,31 @@
+# WIPP Frontend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wipp-frontend
+spec:
+  selector:
+    matchLabels:
+      app: wipp-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wipp-frontend
+    spec:
+      containers:
+      - image: wipp/wipp-frontend:3.0.0-beta
+        name: wipp-frontend
+        imagePullPolicy: Always
+        args: ["wipp-backend", "8080"]
+        env:
+        - name: ARGOUIBASE_URL
+          value: "http://localhost:32002/workflows/default"
+        - name: JUPYTERHUB_URL
+          value: "http://localhost:32003"
+        - name: VISIONUI_URL
+          value: "http://localhost:32004"
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+---

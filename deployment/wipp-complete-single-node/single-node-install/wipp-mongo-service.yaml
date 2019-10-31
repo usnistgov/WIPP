@@ -1,0 +1,15 @@
+# WIPP MongoDB Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: wipp-mongo
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: mongodb
+---
