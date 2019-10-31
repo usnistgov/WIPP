@@ -29,7 +29,7 @@ The core of the WIPP framework consists of:
 
 Additional tools can be added to the WIPP core for a more complete system:
 - [JupyterHub](https://github.com/LabShare/notebooks-deploy), to develop polyglot Jupyter notebooks that can be used in WIPP workflows,
-- Plots, for scalable and interactive scatterplots visualization,
+- [Plots](https://hub.docker.com/r/labshare/vision-ui), for scalable and interactive scatterplots visualization,
 - [Tensorboard](https://www.tensorflow.org/tensorboard), for Tensorflow jobs monitoring,
 - [Elastic Stack](https://www.elastic.co/what-is/elk-stack) for application, logs and system monitoring.
 
