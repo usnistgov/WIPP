@@ -56,6 +56,16 @@ The following components are included in the single-node deployment:
 - Plots,
 - Tensorboard.
 
+### GPU support - optional
+We provide WIPP plugins for CNN-based segmentation using Tensorflow. These plugins require access to a GPU in the Kubernetes cluster.  
+The requirements for running the using the [WIPP UNet CNN Semantic-Segmentation Training plugin](https://github.com/usnistgov/WIPP-unet-train-plugin) and [WIPP UNet CNN Semantic-Segmentation Inference plugin](https://github.com/usnistgov/WIPP-unet-inference-plugin) are:
+- Cuda 10.1 installed,
+- nvidia-docker-runtime and set as default docker runtime
+- GPU support enabled in the cluster (for example, by installing the [NVIDIA Device Plugin for Kubernetes](https://github.com/NVIDIA/k8s-device-plugin) or enabling the `gpu` addon in microk8s)
+
+Alternatively, some GPU cards may be compatible with the preview release of the [NVIDIA GPU Operator for Kubernetes](https://github.com/NVIDIA/gpu-operator), which aims to simplify NVIDIA GPU resources in Kubernetes clusters.
+
+
 ### Important security information
 The WIPP framework is currently in beta version and instructions are provided for deploying a testing instance of the system.  
 *The Web Image Processing Pipelines system (WIPP) version 3.0.0-beta does not include any web security management. WIPP 3.0.0-beta allows unrestricted uploading of files via the web browser interface and the uploaded files interact with the file system as well as with an instance of MongoDB database.
