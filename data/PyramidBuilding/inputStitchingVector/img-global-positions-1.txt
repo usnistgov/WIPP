@@ -1,0 +1,16 @@
+file: img_r001_c001.ome.tif; corr: -1.0000000000; position: (0, 0); grid: (0, 0);
+file: img_r001_c002.ome.tif; corr: 4.9984933178; position: (338, 0); grid: (1, 0);
+file: img_r001_c003.ome.tif; corr: 4.9994943898; position: (676, 0); grid: (2, 0);
+file: img_r001_c004.ome.tif; corr: 0.9997723034; position: (1014, 0); grid: (3, 0);
+file: img_r002_c001.ome.tif; corr: 0.9964289519; position: (0, 252); grid: (0, 1);
+file: img_r002_c002.ome.tif; corr: 0.9950826621; position: (338, 252); grid: (1, 1);
+file: img_r002_c003.ome.tif; corr: 4.9971578698; position: (676, 252); grid: (2, 1);
+file: img_r002_c004.ome.tif; corr: 0.9997861239; position: (1014, 252); grid: (3, 1);
+file: img_r003_c001.ome.tif; corr: 0.9949516210; position: (0, 504); grid: (0, 2);
+file: img_r003_c002.ome.tif; corr: 0.9904605715; position: (338, 504); grid: (1, 2);
+file: img_r003_c003.ome.tif; corr: 0.9940573836; position: (676, 504); grid: (2, 2);
+file: img_r003_c004.ome.tif; corr: 4.9969626973; position: (1014, 504); grid: (3, 2);
+file: img_r004_c001.ome.tif; corr: 0.9824402406; position: (0, 756); grid: (0, 3);
+file: img_r004_c002.ome.tif; corr: 4.9889367317; position: (338, 756); grid: (1, 3);
+file: img_r004_c003.ome.tif; corr: 4.9978588934; position: (676, 756); grid: (2, 3);
+file: img_r004_c004.ome.tif; corr: 0.9995299006; position: (1014, 756); grid: (3, 3);

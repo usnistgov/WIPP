@@ -71,6 +71,14 @@ The WIPP framework is currently in beta version and instructions are provided fo
 *The Web Image Processing Pipelines system (WIPP) version 3.0.0-beta does not include any web security management. WIPP 3.0.0-beta allows unrestricted uploading of files via the web browser interface and the uploaded files interact with the file system as well as with an instance of MongoDB database.
 WIPP 3.0.0-beta is intended for deployment on private networks behind a firewall. Future releases will include account and upload access management.*
 
+## User Guide
+
+User guide detailing how to perform routine operations in WIPP, such as uploading images, registering plugins and configuring workflows is available in the [user guide folder](user-guide).
+
+## Test datasets
+
+To test a fresh installation of WIPP, we provide three sample datasets with instructions on how to run test workflows using these datasets in the [data folder](data).
+
 ## WIPP plugins
 
 Manifest files to install the currently available WIPP plugins can be found in the [plugins folder](plugins).
