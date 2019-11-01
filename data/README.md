@@ -12,7 +12,7 @@ To test a fresh installation of WIPP, we provide three sample datasets with inst
  - Image Assembling ([link to plugin manifest](https://github.com/usnistgov/WIPP-image-assembling-plugin/blob/master/wipp-image-assembling-plugin.json))
  - EGT Segmentation ([link to plugin manifest](https://github.com/usnistgov/WIPP-EGT-plugin/blob/master/wipp-egt-plugin.json))
  - Mask Labeling ([link to plugin manifest](https://github.com/usnistgov/WIPP-mask-labeling-plugin/blob/master/wipp-mask-labeling-plugin.json))
- - Feature Extraction ([link to plugin manifest](https://github.com/usnistgov/WIPP/blob/develop/plugins/wipp-feature2djava-plugin.json))
+ - Feature Extraction ([link to plugin manifest](https://github.com/usnistgov/WIPP/blob/master/plugins/wipp-feature2djava-plugin.json))
 
 ## Thresholding
 

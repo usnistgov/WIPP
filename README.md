@@ -81,7 +81,8 @@ To test a fresh installation of WIPP, we provide three sample datasets with inst
 
 ## WIPP plugins
 
-Manifest files to install the currently available WIPP plugins can be found in the [plugins folder](plugins).
+Links to manifest files to install the currently available WIPP plugins can be found in the [plugins folder](plugins).  
+*Documentation about how to create custom WIPP plugins coming soon!*
 
 ## Troubleshooting
 
