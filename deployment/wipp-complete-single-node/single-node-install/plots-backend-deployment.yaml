@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: vision-api
-        image: labshare/vision-api:0.3.33
+        image: labshare/vision-api:0.4.0
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
