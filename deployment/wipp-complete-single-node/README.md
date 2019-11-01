@@ -10,10 +10,10 @@ kubectl apply -f wipp-single-node.yaml
 
 If you do not have Kubernetes cluster or don't know how to create one, follow the instructions below for popular operating systems to get the working local WIPP installation on your computer:
 
-- [macOS (with Docker Desktop)](#macOS-(with-Docker-Desktop))
-- [macOS (with Multipass+microk8s)](#macOS-(with-Multipass+microk8s))
-- [Linux (Multipass+microk8s)](#Linux-(Multipass+microk8s))
-- [Windows 10 (Multipass+microk8s)](#Windows-10-(Multipass+microk8s))
+- [macOS (with Docker Desktop)](#macos-with-docker-desktop)
+- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s)
+- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s)
+- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s)
 
 ### Volume size considerations
 

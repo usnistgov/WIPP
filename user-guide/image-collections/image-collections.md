@@ -1,6 +1,6 @@
 # Image Collections
 
-A user starts with image collections saved on a disk and needs to upload files to WIPP. The Image Collections tab exposes the interface for a user to transfer data from disk to the WIPP system and manage the data. The data management includes creation of image collections, uploading and downloading files, and file deletion before collections are processed. Click on the "Manage Image Collections" tab on the left side to access image collection management. 
+A user starts with image collections saved on a disk and needs to upload files to WIPP. The Image Collections view exposes the interface for a user to transfer data from disk to the WIPP system and manage the data. The data management includes creation of image collections, uploading and downloading files, and file deletion before collections are processed. Click on "Data" on the menu bar, then "Images collections" to access images collections management. 
 
 ![](image-collections-list.png)
 *Figure1: WIPP Image Collections screenshot*
@@ -29,14 +29,14 @@ Enter a name of the new collection and configure the upload options, then click 
 
 # Collection detail information
 
-The information about collections includes name, creation date, number of files in the collection, total size of the collection, the source source job if the collection has been created by applying one of the processing jobs, and the filename pattern. The collection name must be unique and may be modified any time by clicking on it and editing the text.
+The information about collections includes name, creation date, number of files in the collection, total size of the collection, the source source job if the collection has been created during the execution of a workflow, and the filename pattern. The collection name must be unique and may be modified any time by clicking on it and editing the text.
 
 ![](collection-detail.png)
 *Figure 3: WIPP Image Collection screenshot*
 
 # Upload images
 
-Upload images using the "Add files to collection" or "Add folder to collection" buttons, or drag and drop files from your computer to the "Drag and Drop" area on the right. The option "Add folder to collection" might not be available in some web browsers. Uploaded files other than images will be classified as "Metadata files". Uploaded images will be automatically converted to the OME-TIFF format and are compressed using a Lempel-Ziv-Welch (LZW) compression.
+Upload images using the "Add files to collection" or "Add folder to collection" buttons, or drag and drop files from your computer to the "Drag and Drop" area on the right. The option "Add folder to collection" might not be available in some web browsers. Uploaded files other than images will be classified as "Metadata files". Uploaded images will be automatically tiled, converted to the OME-TIFF format and compressed using a Lempel-Ziv-Welch (LZW) compression.
 The progress of the upload is displayed using a progress bar per file. All files are displayed in two tables, one for image tiles and one for metadata files. The progress of image conversions to OME-TIFF format is also displayed on top of the Images table, as "Images being uploaded: #number". 
 File upload can be slow since it depends on the connectivity between the server and the browser. File conversion to ome.tif may take longer than the upload depending on the computing power of the server.
 
