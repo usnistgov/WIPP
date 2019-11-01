@@ -67,6 +67,7 @@ multipass exec wipp -- sudo usermod -a -G microk8s multipass
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
+multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
@@ -108,6 +109,7 @@ multipass exec wipp -- sudo usermod -a -G microk8s multipass
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
+multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
@@ -150,6 +152,7 @@ multipass exec wipp -- sudo usermod -a -G microk8s multipass
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
+multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 5. Print the Kubernetes config:
