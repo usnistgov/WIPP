@@ -5,6 +5,7 @@ WIPP relies on Kubernetes (k8s) to run. If you have Kubernetes cluster available
 ```
 kubectl apply -f wipp-single-node.yaml
 ```
+Please note that this installation has been tested with Kubernetes versions 1.13 to 1.16 and may not work properly with versions < 1.13.
 
 ## Installation
 
@@ -115,7 +116,7 @@ multipass info wipp | grep IP
 > IPv4:           x.x.x.x
 ```
 5. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
-6. Copy the Kubernetes config and deploy WIPP:
+6. Copy the Kubernetes config and deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/):
 ```
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
 kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
