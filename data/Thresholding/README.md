@@ -45,8 +45,9 @@ Click on "Add task" and choose "ThresholdingPlugin 1.0.0" in the dropdown list.
 
 Configure the task as follow:
 - Task name: ostu
-- Image Collection: start typing "thresholding-small-dataset" and select this collection in the list
+- Image Collection: start typing "thresholding-small-dataset" and select this collection from the list
 - Threshold Type: select "Otsu"
+
 Click on "Add task"
 
 ![](screenshots/configure-task.png)
