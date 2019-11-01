@@ -139,6 +139,7 @@ Make sure you have Windows 10 Pro, Enterprise or Education; Windows 10 Home is n
 multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
 ```
 Depending on your PC configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
+
 4. Install and start microk8s:
 ```
 multipass exec wipp -- sudo apt update
