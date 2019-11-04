@@ -16,6 +16,8 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 - [Linux (Multipass+microk8s)](#linux-multipassmicrok8s)
 - [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s)
 
+All of these sets of instructions assume that you have cloned or downloaded this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
+
 ### Volume size considerations
 
 Kubernetes require to specify the volume size before deploying apps. `wipp-single-node.yaml` contains some reasonable defaults for testing WIPP on a single computer/laptop, which you might want to change to better suit your case. Below is the list of volumes with default size and reference to config, so you can change them before deploying.
@@ -39,7 +41,23 @@ Kubernetes require to specify the volume size before deploying apps. `wipp-singl
 ```
 kubectl apply -f wipp-single-node.yaml
 ```
-7. In browser, access the apps at the following addresses:
+
+7. Check that the WIPP pods are running (it may take a few minutes for the Docker images to be downloaded and containers to be started):
+
+```
+kubectl get pods
+```
+
+Output should be similar to this one for the pods starting with `wipp-`:
+
+```
+NAME                             READY   STATUS      RESTARTS   AGE
+wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
+wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
+```
+
+8. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
@@ -81,7 +99,23 @@ multipass info wipp | grep IP
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
 kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
-7. In browser, access the apps at the following addresses:
+
+7. Check that the WIPP pods are running (it may take a few minutes for the Docker images to be downloaded and containers to be started):
+
+```
+kubectl --kubeconfig=kubeconfig get pods
+```
+
+Output should be similar to this one for the pods starting with `wipp-`:
+
+```
+NAME                             READY   STATUS      RESTARTS   AGE
+wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
+wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
+```
+
+8. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
@@ -123,7 +157,23 @@ multipass info wipp | grep IP
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
 kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
-7. In browser, access the apps at the following addresses:
+
+7. Check that the WIPP pods are running (it may take a few minutes for the Docker images to be downloaded and containers to be started):
+
+```
+kubectl --kubeconfig=kubeconfig get pods
+```
+
+Output should be similar to this one for the pods starting with `wipp-`:
+
+```
+NAME                             READY   STATUS      RESTARTS   AGE
+wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
+wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
+```
+
+8. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
@@ -132,10 +182,11 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 
 
 ### Windows 10 (Multipass+microk8s)
-Make sure you have Windows 10 Pro, Enterprise or Education; Windows 10 Home is not supported.
+Make sure you have Windows 10 Pro, Enterprise or Education to use the standard Multipass installation with Hyper-V; Windows 10 Home is not supported and will require an installation of VirtualBox.
 
-1. Download and install Multipass for Windows: https://multipass.run/#install Multipass creates on-demand Linux VMs and provides an easy way to run Kubernetes using microk8s. 
-2. Enable Hyper-V on Windows: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
+1. Enable Hyper-V on Windows: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v  
+If you are unable to enable Hyper-V, or prefer to use VirtualBox, please refer to this [online documentation for installing Multipass on Windows](https://discourse.ubuntu.com/t/installing-multipass-for-windows/9547) and follow the instructions for VirtualBox.
+2. Download and install Multipass for Windows: https://multipass.run/#install Multipass creates on-demand Linux VMs and provides an easy way to run Kubernetes using microk8s. 
 3. Create Multipass VM:
 ```
 multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
@@ -160,6 +211,7 @@ multipass exec wipp -- /snap/bin/microk8s.enable storage
 multipass exec wipp -- /snap/bin/microk8s.config
 ```
 Copy the output of the command to `kubeconfig` file.
+
 6. Find the IP of Multipass VM:
 ```
 multipass info wipp
@@ -172,7 +224,23 @@ Copy the IP address `x.x.x.x`.
 ```
 .\kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
-9. In browser, access the apps at the following addresses:
+
+9. Check that the WIPP pods are running (it may take a few minutes for the Docker images to be downloaded and containers to be started):
+
+```
+.\kubectl.exe --kubeconfig=kubeconfig get pods
+```
+
+Output should be similar to this one for the pods starting with `wipp-`:
+
+```
+NAME                             READY   STATUS      RESTARTS   AGE
+wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
+wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
+```
+
+10. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
    * Notebooks: x.x.x.x:32003
