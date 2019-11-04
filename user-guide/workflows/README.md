@@ -25,9 +25,9 @@ Just choose a name and hit the "Save" button.
 
 The workflow details page is displayed after:
 * creating a new workflow
-* clicking on a workflow to see it's details
+* clicking on a workflow to see its details
 
-From there the user can create a new task, see a task details, or submit / monitor a workflow.
+From there the user can create a new task, see a task details, or submit/monitor a workflow.
 
 ![alt text](workflow_detail.png)
 *Figure 3: example of a workflow*
