@@ -210,7 +210,7 @@ multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 multipass exec wipp -- /snap/bin/microk8s.config
 ```
-Copy the output of the command to `kubeconfig` file.
+Copy the output of the command to `kubeconfig` file in the current directory.
 
 6. Find the IP of Multipass VM:
 ```
@@ -222,13 +222,13 @@ Copy the IP address `x.x.x.x`.
 
 8. Deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/):
 ```
-.\kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
+kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
 
 9. Check that the WIPP pods are running (it may take a few minutes for the Docker images to be downloaded and containers to be started):
 
 ```
-.\kubectl.exe --kubeconfig=kubeconfig get pods
+kubectl.exe --kubeconfig=kubeconfig get pods
 ```
 
 Output should be similar to this one for the pods starting with `wipp-`:
