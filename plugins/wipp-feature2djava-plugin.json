@@ -1,6 +1,6 @@
 {
   "name": "WIPP Feature2DJava Plugin",
-  "version": "1.4.0-t6",
+  "version": "1.4.0",
   "title": "WIPP Feature2DJava Plugin",
   "description": "WIPP 2D Grayscale Image Feature Extraction (Java)",
   "containerId": "wipp/wipp-feature2djava-plugin:1.4.0",
@@ -49,7 +49,6 @@
                     { "description": "Eccentricity", "enum": [ "Feature2DJava_Eccentricity" ] }, 
                     { "description": "Entropy", "enum": [ "Feature2DJava_Entropy" ] }, 
                     { "description": "ExtendBB", "enum": [ "Feature2DJava_ExtendBB" ] }, 
-                    { "description": "Mean", "enum": [ "Feature2DJava_Mean" ] }, 
                     { "description": "Median", "enum": [ "Feature2DJava_Median" ] }, 
                     { "description": "Mode", "enum": [ "Feature2DJava_Mode" ] },
                     { "description": "Orientation", "enum": [ "Feature2DJava_Orientation" ] },
