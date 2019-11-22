@@ -108,7 +108,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: wipp/wipp-frontend:3.0.0-beta
+      - image: wipp/wipp-frontend:3.0.0-beta.1
         name: wipp-frontend
         imagePullPolicy: Always
         args: ["wipp-backend", "8080"]

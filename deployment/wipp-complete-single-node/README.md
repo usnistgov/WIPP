@@ -18,6 +18,17 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 
 All of these sets of instructions assume that you have cloned or downloaded this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
+### Upgrading from WIPP-3.0.0-beta to WIPP-3.0.0-beta.1
+
+If you already have a running instance of WIPP-3.0.0-beta and want to upgrade to WIPP-3.0.0-beta.1 (recommended), please follow the upgrade instructions according to your installation setup:
+
+- [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 8
+- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 8
+- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 8
+- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 10
+
+These instructions assume that you have pulled or downloaded the latest version of this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
+
 ### Volume size considerations
 
 Kubernetes require to specify the volume size before deploying apps. `wipp-single-node.yaml` contains some reasonable defaults for testing WIPP on a single computer/laptop, which you might want to change to better suit your case. Below is the list of volumes with default size and reference to config, so you can change them before deploying.
@@ -63,7 +74,6 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
-
 
 ### macOS (with Multipass+microk8s)
 
