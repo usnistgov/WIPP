@@ -86,6 +86,8 @@ Configure the task as follow:
 - Task name: pyr
 - Input Images: start typing "small-fluorescent-dataset" and select this collection from the list
 - Input Stitching Vector: start typing "{{ small-fluoro-test-stitch.outputPath }}" and select this stitching vector (from previous step) from the list
+- Blending method: overlay
+- Image depth: 16U
 
 Click on "Add task"
 
@@ -109,7 +111,7 @@ Click on "Add task"
 
 ### Feature Extraction task
 
-Click on "Add task" and choose "EGTSegmentationPlugin 1.0.3" in the dropdown list.  
+Click on "Add task" and choose "WIPP Feature2DJava Plugin 1.4.0" in the dropdown list.  
 
 Configure the task as follow:
 - Task name: feat
