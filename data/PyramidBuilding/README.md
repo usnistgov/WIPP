@@ -60,7 +60,7 @@ Click on "New workflow", fill in the Name field as "pyramid-test" and click on "
 ![](screenshots/new-workflow.png)
 
 
-Click on "Add task" and choose "WIPP Pyramid plugin 0.0.2" in the dropdown list.  
+Click on "Add task" and choose "WIPP Pyramid plugin 0.0.6" in the dropdown list.  
 
 ![](screenshots/add-task.png)
 
@@ -70,6 +70,7 @@ Configure the task as follow:
 - Input Stitching Vector: start typing "pyramid-small-dataset-sv" and select this stitching vector from the list
 - Blending method: select "overlay"
 - Image depth: select "16U"
+- Advanced Options: leave empty
 
 Click on "Add task"
 
