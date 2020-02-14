@@ -8,7 +8,7 @@ For step-by-step tutorials on how to run workflows with sample datasets, please 
 
 How to prepare images for WIPP, upload images and manage collections.
 
-[Images collections documentation](image-collection/README.md)
+[Images collections documentation](image-collections/README.md)
 
 ## Plugins
 
