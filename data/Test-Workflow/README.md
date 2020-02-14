@@ -9,6 +9,7 @@
  - Pyramid Building ([link to plugin manifest](https://github.com/usnistgov/WIPP-pyramid-plugin/blob/master/wipp-pyramid-plugin.json))
  - Image Assembling ([link to plugin manifest](https://github.com/usnistgov/WIPP-image-assembling-plugin/blob/master/wipp-image-assembling-plugin.json))
  - EGT Segmentation ([link to plugin manifest](https://github.com/usnistgov/WIPP-EGT-plugin/blob/master/wipp-egt-plugin.json))
+ - Mask labeling ([link to plugin manifest](https://github.com/usnistgov/WIPP-mask-labeling-plugin/blob/master/wipp-mask-labeling-plugin.json))
  - Feature Extraction ([link to plugin manifest](https://github.com/usnistgov/WIPP/blob/master/plugins/wipp-feature2djava-plugin.json))
  
 ## Upload images collection
@@ -80,7 +81,7 @@ Click on "Add task"
 
 ### Pyramid Building task
 
-Click on "Add task" and choose "WIPP Pyramid plugin 0.0.2" in the dropdown list.  
+Click on "Add task" and choose "WIPP Pyramid plugin 0.0.6" in the dropdown list.  
 
 Configure the task as follow:
 - Task name: pyr
@@ -88,6 +89,7 @@ Configure the task as follow:
 - Input Stitching Vector: start typing "{{ small-fluoro-test-stitch.outputPath }}" and select this stitching vector (from previous step) from the list
 - Blending method: overlay
 - Image depth: 16U
+- Advanced Options: leave empty
 
 Click on "Add task"
 
@@ -95,19 +97,34 @@ Click on "Add task"
 
 ### EGT Segmentation task
 
-Click on "Add task" and choose "EGTSegmentationPlugin 1.0.3" in the dropdown list.  
+Click on "Add task" and choose "EGTSegmentationPlugin 1.1.6" in the dropdown list.  
 
 Configure the task as follow:
 - Task name: seg
 - Input Images: start typing "{{ small-fluoro-test-assemb.output }}" and select this collection from the list
 - Minimum Hole Size: 2000
 - Minimum Object Size: 1000
+- Greedy: 0
 - Image Depth: 16U
-- Generate Labeled Masks instead of Binary Masks: check box (the labeled masks will be used in the next task)
+- Generate Labeled Masks instead of Binary Masks: uncheck box
+- Advanced Options: Leave empty
 
 Click on "Add task"
 
 ![](screenshots/add-task-seg.png)
+
+### Mask Labeling task
+
+Click on "Add task" and choose "WIPP Mask labeling plugin 0.0.2" in the dropdown list.  
+
+Configure the task as follow:
+- Task name: label
+- Input Images: start typing "{{ small-fluoro-test-seg.output }}" and select this collection from the list
+- Connectedness: Select "EIGHT_CONNECTED"
+
+Click on "Add task"
+
+![](screenshots/add-task-label.png)
 
 ### Feature Extraction task
 
@@ -117,7 +134,7 @@ Configure the task as follow:
 - Task name: feat
 - Input Images: start typing "{{ small-fluoro-test-assemb.output }}" and select this collection from the list
 - Input names pattern: .*.ome.tif
-- Input Partitions (masks): start typing "{{ small-fluoro-test-seg.output }}" and select this collection from the list
+- Input Partitions (masks): start typing "{{ small-fluoro-test-label.output }}" and select this collection from the list
 - Mask names pattern: .*.ome.tif
 - Features: select a few features from the list by clicking "Add" to add a new feature (for example, Area, Mean, Standard Deviation and Skewness)
 
