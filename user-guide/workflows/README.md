@@ -55,14 +55,34 @@ It is possible to reuse the outputs of previous tasks in a same workflow. Those 
 ![alt text](workflow_reuse_outputs.png)
 *Figure 6: reuse an previously created output as an input*
 
-## Task Details
 
+# Copy a Task
+While a workflow is not launched, it is possible to add tasks by copying existing ones.
+To do so, click on the copy icon on the task box of the task you want to copy.
+
+![alt text \label{fig:workflow_icons}](workflow_task_icons.png)
+*Figure 7: Edit and Copy icons on a task*
+
+The fields are pre-populated to be the same as the desired copied task ones.
+The default task name is set to the previous task name followed by "-copy". 
+Click on "Add task" on the bottom right corner to add the newly copied task.
+
+
+# Modify a Task
+While a workflow is not launched, it is possible to modify an existing task.
+To do so, click on the [edit icon](#copy-a-task) on the task box of the task you want to modify. 
+**You can modify everything but the plugin.**
+
+Click on "Edit task" on the bottom right corner once you're done modifying the task to save the changes.
+
+
+## Task Details
 When clicking on a task box on the graph, the details of this task will be displayed.
 The blue color indicates that the link is clickable. Thus you can directly access the inputs / outputs that are already created.
 Also you can access the plugin and workflow pages. 
 
 ![alt text](task_details.png)
-*Figure 7: example of task details*
+*Figure 8: example of task details*
 
 ## Display Options
 
@@ -71,7 +91,7 @@ The left column of the page reads "Graph options". It is possible to:
 * change the orientation of the graph
 
 ![alt text](display_options.png)
-*Figure 8: graph display options*
+*Figure 9: graph display options*
 
 
 # Submit Workflow
@@ -91,4 +111,4 @@ The left box color of each task is:
 
 
 ![alt text](argo.png)
-*Figure 9: Progress of a workflow in Argo*
+*Figure 10: Progress of a workflow in Argo*
