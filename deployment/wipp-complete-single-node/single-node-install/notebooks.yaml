@@ -79,7 +79,9 @@ data:
 
     # Set up WIPP UI url for integration with WIPP
     c.KubeSpawner.environment = {
-        'WIPP_UI_URL': 'http://localhost:32001'
+        'WIPP_UI_URL': 'http://localhost:32001',
+        'WIPP_API_INTERNAL_URL': 'http://wipp-backend:8080/api',
+        'WIPP_NOTEBOOKS_PATH': '/opt/shared/wipp/temp/notebooks'
     }
 
     # Service to shutdown inactive Notebook servers after --timeout seconds
