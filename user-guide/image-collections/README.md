@@ -34,6 +34,12 @@ The information about collections includes name, creation date, number of files 
 ![](collection-detail.png)
 *Figure 3: WIPP Image Collection screenshot*
 
+The collection also contains a "notes" field that allows the user to write personal notes about the experiment / the data.
+
+![](images-collections_notes.png)
+*Figure 4: WIPP Image Collection notes screenshot*
+
+
 # Upload images
 
 Upload images using the "Add files to collection" or "Add folder to collection" buttons, or drag and drop files from your computer to the "Drag and Drop" area on the right. The option "Add folder to collection" might not be available in some web browsers. Uploaded files other than images will be classified as "Metadata files". Uploaded images will be automatically tiled, converted to the OME-TIFF format and compressed using a Lempel-Ziv-Welch (LZW) compression.
@@ -48,7 +54,7 @@ It is recommended to use Google Chrome to upload images to take advantage of the
 See illustrated examples in the Help section of WIPP.
 
 ![](upload-images.png)
-*Figure 4: WIPP Image Collection upload screenshot*
+*Figure 5: WIPP Image Collection upload screenshot*
 
 # Download images
 
