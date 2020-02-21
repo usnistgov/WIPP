@@ -18,9 +18,9 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 
 All of these sets of instructions assume that you have cloned or downloaded this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
-### Upgrading from WIPP-3.0.0-beta to WIPP-3.0.0-beta.1
+### Upgrading from WIPP 3.0.0-beta/beta.1 to WIPP-3.0.0-beta2
 
-If you already have a running instance of WIPP-3.0.0-beta and want to upgrade to WIPP-3.0.0-beta.1 (recommended), please follow the upgrade instructions according to your installation setup:
+If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.0-beta2, please follow the upgrade instructions according to your installation setup:
 
 - [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 8
 - [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 8

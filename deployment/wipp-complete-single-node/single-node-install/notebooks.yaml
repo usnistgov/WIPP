@@ -13,7 +13,7 @@ data:
     c.KubeSpawner.start_timeout=1000
 
     # Which container to spawn
-    c.KubeSpawner.image_spec='labshare/polyglot-notebook:0.3.3'
+    c.KubeSpawner.image_spec='labshare/polyglot-notebook:0.5.3'
     c.KubeSpawner.default_url = '/lab'
     c.KubeSpawner.uid = 1000 #uid 1000 corresponds to jovyan, uid 0 to root
     c.KubeSpawner.cmd = ['jupyter-labhub']
@@ -505,7 +505,7 @@ spec:
       serviceAccountName: jupyterhub-sa
       containers:
         - name: jupyterhub
-          image: labshare/jupyterhub:0.3.1
+          image: labshare/jupyterhub:0.3.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

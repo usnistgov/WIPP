@@ -58,7 +58,7 @@ spec:
     spec:
       serviceAccountName: wipp-backend-sa
       containers:
-        - image: wipp/wipp-backend:3.0.0-beta
+        - image: wipp/wipp-backend:3.0.0-beta2
           name: wipp-backend
           imagePullPolicy: Always
           args: ["wipp-mongo", "27017", "wipp-pv-claim"]
@@ -108,7 +108,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: wipp/wipp-frontend:3.0.0-beta.1
+      - image: wipp/wipp-frontend:3.0.0-beta2
         name: wipp-frontend
         imagePullPolicy: Always
         args: ["wipp-backend", "8080"]
@@ -516,7 +516,7 @@ data:
     c.KubeSpawner.start_timeout=1000
 
     # Which container to spawn
-    c.KubeSpawner.image_spec='labshare/polyglot-notebook:0.3.3'
+    c.KubeSpawner.image_spec='labshare/polyglot-notebook:0.5.3'
     c.KubeSpawner.default_url = '/lab'
     c.KubeSpawner.uid = 1000 #uid 1000 corresponds to jovyan, uid 0 to root
     c.KubeSpawner.cmd = ['jupyter-labhub']
@@ -1008,7 +1008,7 @@ spec:
       serviceAccountName: jupyterhub-sa
       containers:
         - name: jupyterhub
-          image: labshare/jupyterhub:0.3.1
+          image: labshare/jupyterhub:0.3.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
