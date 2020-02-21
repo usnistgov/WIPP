@@ -91,7 +91,7 @@ multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
-multipass exec wipp -- sudo usermod -a -G microk8s multipass
+multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
@@ -149,7 +149,7 @@ multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
-multipass exec wipp -- sudo usermod -a -G microk8s multipass
+multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
@@ -209,7 +209,7 @@ multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
-multipass exec wipp -- sudo usermod -a -G microk8s multipass
+multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
