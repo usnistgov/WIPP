@@ -10,6 +10,12 @@ How to prepare images for WIPP, upload images and manage collections.
 
 [Images collections documentation](image-collections/README.md)
 
+## Stitching Vectors
+
+How to upload and manage Stitching Vectors. 
+
+[Stitching Vectors documentation](stitching-vectors/README.md)
+
 ## Plugins
 
 How to register a new plugin and see registered plugins.
