@@ -28,6 +28,6 @@ How to create a new workflow, configure tasks and monitor workflows.
 
 How to create and view other data types managed in WIPP.
 
-[Stitching Vectors documentation](stitching-vectors/README.md)
+[Stitching Vectors documentation](stitching-vectors/README.md)  
 [Pyramids documentation](pyramids/README.md)  
 [Pyramid Visualizations documentation](pyramid-visualizations/README.md)
