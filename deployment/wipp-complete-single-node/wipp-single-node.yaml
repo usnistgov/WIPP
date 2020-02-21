@@ -1231,10 +1231,10 @@ spec:
       containers:
       - name: fix-wipp-permissions
         image: busybox
-        command: [ "sh", "-c", "chown 1000:1000 /opt/claim/" ]
+        command: [ "sh", "-c", "chown 1000:1000 /opt/shared/wipp/temp" ]
         volumeMounts:
           - name: volume
-            mountPath: /opt/claim
+            mountPath: /opt/shared/wipp
       volumes:
       - name: volume
         persistentVolumeClaim:
