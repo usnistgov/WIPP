@@ -10,12 +10,6 @@ How to prepare images for WIPP, upload images and manage collections.
 
 [Images collections documentation](image-collections/README.md)
 
-## Stitching Vectors
-
-How to upload and manage Stitching Vectors. 
-
-[Stitching Vectors documentation](stitching-vectors/README.md)
-
 ## Plugins
 
 How to register a new plugin and see registered plugins.
@@ -34,5 +28,6 @@ How to create a new workflow, configure tasks and monitor workflows.
 
 How to create and view other data types managed in WIPP.
 
+[Stitching Vectors documentation](stitching-vectors/README.md)
 [Pyramids documentation](pyramids/README.md)  
 [Pyramid Visualizations documentation](pyramid-visualizations/README.md)

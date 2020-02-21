@@ -18,7 +18,7 @@ For example, tiles images for a grid of 10 rows x 10 columns may be named as fol
 
 # Create a new image collection
 
-From the Image Collections view, click on the "Create new collection" button to create a new collection and start uploading images:
+From the Image Collections view, click on the "New images collection" button to create a new collection and start uploading images:
 
 ![](new-images-collection.png)
 *Figure 2: WIPP Create Image Collection screenshot*
@@ -29,7 +29,7 @@ Enter a name of the new collection and configure the upload options, then click 
 
 # Collection detail information
 
-The information about collections includes name, creation date, number of files in the collection, total size of the collection, the source source job if the collection has been created during the execution of a workflow, and the filename pattern. The collection name must be unique and may be modified any time by clicking on it and editing the text.
+The information about collections includes name, creation date, number of files in the collection, total size of the collection, the source job if the collection has been created during the execution of a workflow, and the filename pattern. The collection name must be unique and may be modified any time by clicking on it and editing the text.
 
 ![](collection-detail.png)
 *Figure 3: WIPP Image Collection screenshot*
