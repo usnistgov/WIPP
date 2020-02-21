@@ -61,11 +61,6 @@ See illustrated examples in the Help section of WIPP.
 Each image in a collection can be downloaded using the download button with the arrow icon from the "Actions" column. 
 The whole image collection can be downloaded as a ZIP file using the download button from the top right corner of the view.
 
-# Download images
-
-Each image in a collection can be downloaded using the download button with the arrow icon from the "Actions" column. 
-The whole image collection can be downloaded as a ZIP file using the download button from the top right corner of the view.
-
 # Download metadata
 
 Each image might be associated with the metadata information describing the microscope acquisition parameters. The metadata information per image can be downloaded using the download button with the icon containing "i" from the "Actions" column. 

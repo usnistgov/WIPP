@@ -17,7 +17,7 @@ The "New workflow" button opens a pop up that allows the user to create a new wo
 
 Just choose a name and hit the "Save" button.
 
-![alt text](new_workflow.png)
+![alt text](new_workflow.png)  
 *Figure 2: creation of a new workflow*
 
 
@@ -40,27 +40,27 @@ The second column is a box that will contains an interactive graph that represen
 The first step to populate a workflow is to add tasks. To do so, hit the "Add task" button on the left column.
 You can add as many tasks as desired.
 
-![alt text](new_task_plugin.png)
+![alt text](new_task_plugin.png)  
 *Figure 4: creation of a new workflow*
 
 You can choose a plugin between all those available in WIPP. 
 Each plugin contains different inputs with different types. 
 When looking for data from WIPP (images-collections, stitching-vectors...), just start typing the name and the available data will be suggested by autocomplete. 
 
-![alt text](new_task_autocomplete.png)
+![alt text](new_task_autocomplete.png)  
 *Figure 5: autocomplete of an images-collection*
 
 It is possible to reuse the outputs of previous tasks in a same workflow. Those outputs are written between embraces and are written on top of the in the inputs list.
 
-![alt text](workflow_reuse_outputs.png)
+![alt text](workflow_reuse_outputs.png)  
 *Figure 6: reuse an previously created output as an input*
 
 
 # Copy a Task
-While a workflow is not launched, it is possible to add tasks by copying existing ones.
+Before a workflow is submitted, it is possible to add tasks by copying existing ones.
 To do so, click on the copy icon on the task box of the task you want to copy.
 
-![alt text \label{fig:workflow_icons}](workflow_task_icons.png)
+![alt text \label{fig:workflow_icons}](workflow_task_icons.png)  
 *Figure 7: Edit and Copy icons on a task*
 
 The fields are pre-populated to be the same as the desired copied task ones.
@@ -69,7 +69,7 @@ Click on "Add task" on the bottom right corner to add the newly copied task.
 
 
 # Modify a Task
-While a workflow is not launched, it is possible to modify an existing task.
+Before a workflow is submitted, it is possible to modify an existing task.
 To do so, click on the [edit icon](#copy-a-task) on the task box of the task you want to modify. 
 **You can modify everything but the plugin.**
 

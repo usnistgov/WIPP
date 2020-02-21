@@ -23,3 +23,10 @@ How to register a new plugin and see registered plugins.
 How to create a new workflow, configure tasks and monitor workflows.
 
 [Workflows documentation](workflows/README.md)
+
+## Other data types in WIPP
+
+How to create and view other data types managed in WIPP.
+
+[Pyramids documentation](pyramids/README.md)  
+[Pyramid Visualizations documentation](pyramid-visualizations/README.md)
