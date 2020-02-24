@@ -55,4 +55,4 @@ Note: If a collection is locked, neither the entire collection nor individual CS
 
 # Visualize CSV plots in plots UI
 
-You can visualize the CSV of the current collection directly in the Plots UI by clicking  the "visualize in Plots UI" button located in the top right corner of the page.
+You can visualize the CSVs of the current collection directly in the Plots UI by clicking  the "Visualize in Plots UI" button located in the top right corner of the page.

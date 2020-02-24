@@ -30,4 +30,5 @@ How to create and view other data types managed in WIPP.
 
 [Stitching Vectors documentation](stitching-vectors/README.md)  
 [Pyramids documentation](pyramids/README.md)  
-[Pyramid Visualizations documentation](pyramid-visualizations/README.md)
+[Pyramid Visualizations documentation](pyramid-visualizations/README.md)  
+[CSV Collections documentation](csv-collections/README.md)
