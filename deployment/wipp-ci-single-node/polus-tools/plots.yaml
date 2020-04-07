@@ -1,0 +1,93 @@
+###############
+# Plots
+###############
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-api
+  labels: 
+    app: vision-api
+spec:
+  selector:
+    matchLabels:
+      app: vision-api
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: vision-api
+    spec:
+      containers:
+      - name: vision-api
+        image: labshare/vision-api:0.4.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: vision-api
+        env:
+        - name: COLLECTION_PATH
+          value: "/data/wipp/csv-collections/<id>"
+        - name: DATASET_BASE_PATH
+          value: "/data/csv/"
+        - name: ELASTIC_APM_SERVICE_NAME
+          value: vision-api
+        volumeMounts:
+        - name: shared-data
+          mountPath: /data/wipp
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: "wippdata-pvc"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-api
+spec:
+  type: NodePort
+  ports: 
+  - port: 80
+    nodePort: 32011
+    targetPort: 3000
+  selector:
+    app: vision-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vision-ui
+  labels: 
+    app: vision-ui
+spec:
+  selector:
+    matchLabels:
+      app: vision-ui
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: vision-ui
+    spec:
+      containers:
+      - name: vision-ui
+        image: labshare/vision-ui:0.3.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: nginx
+        env:
+        - name: VISION_API_URL
+          value: VISION_API_URL_VALUE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vision-ui
+spec:
+  type: NodePort
+  ports: 
+  - port: 80
+    nodePort: 32004
+    targetPort: nginx
+  selector:
+    app: vision-ui
