@@ -477,16 +477,16 @@ metadata:
   name: jupyteruser-sa
 ---
 # PVC for Notebooks
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: notebooks-pv-claim
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 5Gi
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: notebooks-pv-claim
+#spec:
+#  accessModes:
+#  - ReadWriteMany
+#  resources:
+#    requests:
+#      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
