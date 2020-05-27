@@ -37,6 +37,4 @@ spec:
         - containerPort: 80
         resources: {}
       restartPolicy: Always
-      imagePullSecrets:
-      - name: regcred
 status: {}

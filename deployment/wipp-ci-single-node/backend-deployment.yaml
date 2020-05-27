@@ -53,6 +53,9 @@ spec:
         app: wipp-backend
     spec:
       serviceAccountName: wipp-backend-sa
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - image: WIPP_BACKEND_IMAGE
         name: wipp-backend
@@ -61,12 +64,14 @@ spec:
             - name: ELASTIC_APM_SERVER_URLS
               value: ELASTIC_APM_SERVER_URLS_VALUE
             - name: ELASTIC_APM_SERVICE_NAME
-              value: wipp-backend
+              value: wipp-backend-prod
             - name: ELASTIC_APM_APPLICATION_PACKAGES
               value: gov.nist.itl.ssd.wipp.backend
         volumeMounts:
         - mountPath: /data/WIPP-plugins
           name: data
+        - mountPath: /opt/wipp/config/application.properties
+          name: conf
         ports:
         - containerPort: 8080
         resources: {}
@@ -74,7 +79,9 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: wippdata-pvc
+      - name: conf
+        hostPath:
+          path: /opt/WIPP-plugins-conf/application.properties
+          type: File
       restartPolicy: Always
-      imagePullSecrets:
-      - name: regcred
 status: {}

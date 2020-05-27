@@ -16,6 +16,8 @@ data:
     c.KubeSpawner.image_spec='labshare/polyglot-notebook:0.5.3'
     c.KubeSpawner.default_url = '/lab'
     c.KubeSpawner.uid = 1000 #uid 1000 corresponds to jovyan, uid 0 to root
+    c.KubeSpawner.gid = 1000
+    c.KubeSpawner.fs_gid = 1000
     c.KubeSpawner.cmd = ['jupyter-labhub']
     c.KubeSpawner.working_dir = '/home/jovyan'
     c.KubeSpawner.service_account='jupyteruser-sa'

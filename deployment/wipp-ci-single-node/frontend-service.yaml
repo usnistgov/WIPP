@@ -17,5 +17,3 @@ spec:
     nodePort: 30101
   selector:
     app: wipp-frontend
-status:
-  loadBalancer: {}
