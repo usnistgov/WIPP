@@ -18,3 +18,17 @@ The WIPP team provides the following plugins for the WIPP system:
 | ------------- |:-------------:| :-----:|
 | UNet CNN Semantic-Segmentation Training      | [Github](https://github.com/usnistgov/WIPP-unet-train-plugin) | [manifest](https://github.com/usnistgov/WIPP-unet-train-plugin/blob/master/plugin.json) |
 | UNet CNN Semantic-Segmentation Inference      | [Github](https://github.com/usnistgov/WIPP-unet-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-unet-inference-plugin/blob/master/plugin.json) |
+
+**Resnet50-based regression plugins (GPU support required)**
+
+| Name        | Repository           | Plugin manifest  |
+| ------------- |:-------------:| :-----:|
+| Resnet50 Image Regression Training      | [Github](https://github.com/usnistgov/image-regression-resnet50) | [manifest](https://github.com/usnistgov/image-regression-resnet50/blob/master/pluginTraining.json) |
+| Resnet50 Image Regression Inference      | [Github](https://github.com/usnistgov/image-regression-resnet50) | [manifest](https://github.com/usnistgov/image-regression-resnet50/blob/master/pluginInference.json) |
+
+**Resnet50-based classification plugins (GPU support required)**
+
+| Name        | Repository           | Plugin manifest  |
+| ------------- |:-------------:| :-----:|
+| Resnet50 Image Classification Training      | [Github](https://github.com/usnistgov/image-classification-resnet50) | [manifest](https://github.com/usnistgov/image-classification-resnet50/blob/master/pluginTraining.json) |
+| Resnet50 Image Classification Inference      | [Github](https://github.com/usnistgov/image-classification-resnet50) | [manifest](https://github.com/usnistgov/image-classification-resnet50/blob/master/pluginInference.json) |
