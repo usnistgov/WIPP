@@ -11,6 +11,8 @@ The WIPP team provides the following plugins for the WIPP system:
 | Mask Labeling | [Github](https://github.com/usnistgov/WIPP-mask-labeling-plugin) | [manifest](https://github.com/usnistgov/WIPP-mask-labeling-plugin/blob/master/wipp-mask-labeling-plugin.json) |
 | EGT Segmentation | [Github](https://github.com/usnistgov/WIPP-EGT-plugin) | [manifest](https://github.com/usnistgov/WIPP-EGT-plugin/blob/master/wipp-egt-plugin.json) |
 | Feature Extraction | N/A | [manifest](https://github.com/usnistgov/WIPP/blob/master/plugins/wipp-feature2djava-plugin.json) |
+| Annotations to Masks | [Github](https://github.com/usnistgov/WIPP-annotations2masks-plugin)  | [manifest](https://github.com/usnistgov/WIPP-annotations2masks-plugin/blob/master/plugin.json) |
+| Time Sequence FOV | [Github](https://github.com/usnistgov/WIPP-time-seq-fov-plugin) | [manifest](https://github.com/usnistgov/WIPP-time-seq-fov-plugin/blob/master/wipp-plugin.json) |
 
 **CNN-based segmentation plugins (GPU support required)**
 
