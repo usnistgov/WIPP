@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wipp-keycloak
+  labels:
+    app: wipp-keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wipp-keycloak
+  template:
+    metadata:
+      labels:
+        app: wipp-keycloak
+    spec:
+      containers:
+      - args:
+        - -b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm.json
+        env:
+        - name: DB_ADDR
+          value: postgres
+        - name: DB_DATABASE
+          value: keycloak
+        - name: DB_PASSWORD
+          value: password
+        - name: DB_SCHEMA
+          value: public
+        - name: DB_USER
+          value: keycloak
+        - name: DB_VENDOR
+          value: POSTGRES
+        - name: KEYCLOAK_PASSWORD
+          value: admin
+        - name: KEYCLOAK_USER
+          value: admin
+        image: quay.io/keycloak/keycloak:11.0.2
+        name: keycloak
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          httpGet:
+            path: /auth/realms/master
+            port: 8080
+        volumeMounts:
+        - mountPath: "/opt/jboss/keycloak/imports/"
+          name: wipp-realm
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+      - name: wipp-realm
+        secret:
+          secretName: wipp-realm-secret
+status: {}
