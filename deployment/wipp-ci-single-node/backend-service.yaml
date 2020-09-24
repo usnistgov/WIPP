@@ -14,7 +14,7 @@ spec:
   - name: "8080"
     port: 8080
     targetPort: 8080
-    nodePort: 30201
+    nodePort: 30202
   selector:
     app: wipp-backend
 status:

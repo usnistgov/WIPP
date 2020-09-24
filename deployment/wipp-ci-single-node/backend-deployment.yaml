@@ -56,8 +56,12 @@ spec:
       containers:
       - image: WIPP_BACKEND_IMAGE
         name: wipp-backend
-        args: ["mongodb", "27017", "wippdata-pvc"]
+        args: ["mongodb", "27017", "wippdata-keycloak-pvc"]
         env:
+            - name: KEYCLOAK_AUTH_URL
+              value: KEYCLOAK_AUTH_URL_VALUE
+            - name: KEYCLOAK_SSL_REQUIRED
+              value: KEYCLOAK_SSL_REQUIRED_VALUE
             - name: ELASTIC_APM_SERVER_URLS
               value: ELASTIC_APM_SERVER_URLS_VALUE
             - name: ELASTIC_APM_SERVICE_NAME
@@ -73,7 +77,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: wippdata-pvc
+          claimName: wippdata-keycloak-pvc
       restartPolicy: Always
       imagePullSecrets:
       - name: regcred
