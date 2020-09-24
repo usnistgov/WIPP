@@ -27,6 +27,10 @@ spec:
         env:
         - name: ARGOUIBASE_URL
           value: ARGOUIBASE_URL_VALUE
+        - name: KEYCLOAK_HOST
+          value: KEYCLOAK_HOST_VALUE
+        - name: KEYCLOAK_PORT
+          value: KEYCLOAK_PORT_VALUE
         - name: TENSORBOARD_URL
           value: TENSORBOARD_URL_VALUE
         - name: JUPYTERHUB_URL
