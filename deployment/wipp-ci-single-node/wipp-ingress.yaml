@@ -11,6 +11,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: wipp-frontend
+          serviceName: wipp-frontend-keycloak
           servicePort: 80
 
