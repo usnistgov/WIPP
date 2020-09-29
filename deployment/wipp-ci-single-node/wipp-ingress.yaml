@@ -12,5 +12,5 @@ spec:
       paths:
       - backend:
           serviceName: wipp-frontend
-          servicePort: 8080
+          servicePort: 80
 
