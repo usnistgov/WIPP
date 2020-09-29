@@ -11,10 +11,15 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: "80"
+  - name: http
     port: 80
+    protocol: TCP
     targetPort: 80
     nodePort: 30102
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 80
   selector:
     app: wipp-frontend-keycloak
 status:

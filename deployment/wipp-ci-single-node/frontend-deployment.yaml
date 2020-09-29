@@ -38,7 +38,10 @@ spec:
         - name: VISIONUI_URL
           value: VISIONUI_URL_VALUE
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
         resources: {}
       restartPolicy: Always
       imagePullSecrets:
