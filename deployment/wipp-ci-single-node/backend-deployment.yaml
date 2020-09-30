@@ -62,6 +62,8 @@ spec:
               value: KEYCLOAK_AUTH_URL_VALUE
             - name: KEYCLOAK_SSL_REQUIRED
               value: KEYCLOAK_SSL_REQUIRED_VALUE
+            - name: KEYCLOAK_DISABLE_TRUST_MANAGER
+              value: KEYCLOAK_DISABLE_TRUST_MANAGER_VALUE
             - name: ELASTIC_APM_SERVER_URLS
               value: ELASTIC_APM_SERVER_URLS_VALUE
             - name: ELASTIC_APM_SERVICE_NAME
