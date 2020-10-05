@@ -71,7 +71,7 @@ spec:
             - name: KEYCLOAK_SSL_REQUIRED
               value: "external"
             - name: KEYCLOAK_DISABLE_TRUST_MANAGER
-              value: false
+              value: "false"
           volumeMounts:
             - mountPath: /data/WIPP-plugins
               name: data

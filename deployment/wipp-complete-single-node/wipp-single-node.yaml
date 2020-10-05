@@ -71,7 +71,7 @@ spec:
             - name: KEYCLOAK_SSL_REQUIRED
               value: "external"
             - name: KEYCLOAK_DISABLE_TRUST_MANAGER
-              value: false
+              value: "false"
           volumeMounts:
             - mountPath: /data/WIPP-plugins
               name: data
@@ -213,6 +213,138 @@ spec:
     targetPort: 27017
   selector:
     app: mongodb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+      name: postgres
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: keycloak
+        - name: POSTGRES_PASSWORD
+          value: password
+        - name: POSTGRES_USER
+          value: keycloak
+        image: postgres:12
+        name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-data
+        ports:
+        - containerPort: 5432
+        resources: {}
+      restartPolicy: Always
+      volumes:
+      - name: postgres-data
+        hostPath:
+          path: /data/WIPP-postgres
+          type: Directory
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: postgres
+  name: postgres
+spec:
+  ports:
+  - name: "5432"
+    port: 5432
+    protocol: TCP
+  selector:
+    app: postgres
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wipp-keycloak
+  labels:
+    app: wipp-keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wipp-keycloak
+  template:
+    metadata:
+      labels:
+        app: wipp-keycloak
+    spec:
+      containers:
+      - args:
+        - -b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm.json
+        env:
+        - name: DB_ADDR
+          value: postgres
+        - name: DB_DATABASE
+          value: keycloak
+        - name: DB_PASSWORD
+          value: password
+        - name: DB_SCHEMA
+          value: public
+        - name: DB_USER
+          value: keycloak
+        - name: DB_VENDOR
+          value: POSTGRES
+        - name: KEYCLOAK_PASSWORD
+          value: admin
+        - name: KEYCLOAK_USER
+          value: admin
+        - name:  PROXY_ADDRESS_FORWARDING
+          value: "true"
+        image: quay.io/keycloak/keycloak:11.0.2
+        name: keycloak
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          httpGet:
+            path: /auth/realms/master
+            port: 8080
+        volumeMounts:
+        - mountPath: "/opt/jboss/keycloak/imports/"
+          name: wipp-realm
+          readOnly: true
+      restartPolicy: Always
+      volumes:
+      - name: wipp-realm
+        secret:
+          secretName: wipp-realm-secret
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wipp-keycloak
+  labels:
+    app: wipp-keycloak
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 32006
+  selector:
+    app: wipp-keycloak
+status:
+  loadBalancer: {}
 ---
 apiVersion: v1
 kind: Namespace
