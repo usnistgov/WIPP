@@ -1,11 +1,8 @@
-# WIPP Deployment on a single-node cluster - Complete installation
+# WIPP Deployment on a single-node cluster - Testing installation
 
-WIPP relies on Kubernetes (k8s) to run. If you have Kubernetes cluster available or know how to create one, just use the command below to deploy WIPP applications:
+WIPP relies on Kubernetes (k8s) to run. The following instructions will allow you to deploy a testing version of WIPP on a single-node Kubernetes cluster. This configuration is insecure and not meant for production.
 
-```
-kubectl apply -f wipp-single-node.yaml
-```
-Please note that this installation has been tested with Kubernetes versions 1.13 to 1.16 and may not work properly with versions < 1.13.
+Please note that this installation has been tested with Kubernetes versions 1.13 to 1.18 and may not work properly with versions < 1.13.
 
 ## Installation
 

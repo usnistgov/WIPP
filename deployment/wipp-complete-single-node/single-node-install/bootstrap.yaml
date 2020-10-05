@@ -9,10 +9,10 @@ spec:
       containers:
       - name: fix-wipp-permissions
         image: busybox
-        command: [ "sh", "-c", "chown 1000:1000 /data/WIPP-plugins" ]
+        command: [ "sh", "-c", "mkdir -p /opt/shared/wipp/temp; chown 1000:1000 /opt/shared/wipp/temp" ]
         volumeMounts:
           - name: volume
-            mountPath: /data/WIPP-plugins
+            mountPath: /opt/shared/wipp
       volumes:
       - name: volume
         persistentVolumeClaim:

@@ -57,9 +57,6 @@ spec:
         app: wipp-backend
     spec:
       serviceAccountName: wipp-backend-sa
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
       containers:
         - image: wipp/wipp-backend:3.0.0-rc1
           name: wipp-backend
@@ -214,6 +211,18 @@ spec:
   selector:
     app: mongodb
 ---
+# PVC for Postgres
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -249,9 +258,8 @@ spec:
       restartPolicy: Always
       volumes:
       - name: postgres-data
-        hostPath:
-          path: /data/WIPP-postgres
-          type: Directory
+        persistentVolumeClaim:
+          claimName: postgres-pv-claim
 status: {}
 ---
 apiVersion: v1
@@ -365,20 +373,6 @@ spec:
   scope: Namespaced
   version: v1alpha1
 ---
-apiVersion: apiextensions.k8s.io/v1beta1	
-kind: CustomResourceDefinition	
-metadata:	
-  name: workflowtemplates.argoproj.io	
-spec:	
-  group: argoproj.io	
-  names:	
-    kind: WorkflowTemplate	
-    plural: workflowtemplates	
-    shortNames:	
-    - wftmpl	
-  scope: Namespaced	
-  version: v1alpha1	
----
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -390,19 +384,6 @@ kind: ServiceAccount
 metadata:
   name: argo-ui
   namespace: argo
----	
-apiVersion: rbac.authorization.k8s.io/v1	
-kind: Role	
-metadata:	
-  name: argo-role
-  namespace: argo
-rules:	
-- apiGroups:	
-  - ""	
-  resources:	
-  - secrets	
-  verbs:	
-  - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -416,8 +397,6 @@ rules:
   resources:
   - workflows
   - workflows/finalizers
-  - workflowtemplates	
-  - workflowtemplates/finalizers
   verbs:
   - create
   - delete
@@ -440,8 +419,6 @@ rules:
   resources:
   - workflows
   - workflows/finalizers
-  - workflowtemplates	
-  - workflowtemplates/finalizers
   verbs:
   - create
   - delete
@@ -464,8 +441,6 @@ rules:
   resources:
   - workflows
   - workflows/finalizers
-  - workflowtemplates	
-  - workflowtemplates/finalizers
   verbs:
   - get
   - list
@@ -516,22 +491,6 @@ rules:
   - update
   - patch
   - delete
-- apiGroups:	
-  - argoproj.io	
-  resources:	
-  - workflowtemplates	
-  - workflowtemplates/finalizers	
-  verbs:	
-  - get	
-  - list	
-  - watch	
-- apiGroups:	
-  - ""	
-  resources:	
-  - serviceaccounts	
-  verbs:	
-  - get	
-  - list
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -558,24 +517,10 @@ rules:
   - argoproj.io
   resources:
   - workflows
-  - workflowtemplates
   verbs:
   - get
   - list
   - watch
----	
-apiVersion: rbac.authorization.k8s.io/v1	
-kind: RoleBinding	
-metadata:	
-  name: argo-binding	
-  namespace: argo
-roleRef:	
-  apiGroup: rbac.authorization.k8s.io	
-  kind: Role	
-  name: argo-role	
-subjects:	
-- kind: ServiceAccount	
-  name: argo
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -650,7 +595,7 @@ spec:
           value: "false"
         - name: BASE_HREF
           value: /
-        image: argoproj/argoui:v2.4.3
+        image: argoproj/argoui:v2.3.0
         name: argo-ui
       serviceAccountName: argo-ui
 ---
@@ -673,10 +618,10 @@ spec:
         - --configmap
         - workflow-controller-configmap
         - --executor-image
-        - argoproj/argoexec:v2.4.3
+        - argoproj/argoexec:v2.3.0
         command:
         - workflow-controller
-        image: argoproj/workflow-controller:v2.4.3
+        image: argoproj/workflow-controller:v2.3.0
         name: workflow-controller
       serviceAccountName: argo
 ---
@@ -1438,10 +1383,10 @@ spec:
       containers:
       - name: fix-wipp-permissions
         image: busybox
-        command: [ "sh", "-c", "chown 1000:1000 /data/WIPP-plugins" ]
+        command: [ "sh", "-c", "mkdir -p /opt/shared/wipp/temp; chown 1000:1000 /opt/shared/wipp/temp" ]
         volumeMounts:
           - name: volume
-            mountPath: /data/WIPP-plugins
+            mountPath: /opt/shared/wipp
       volumes:
       - name: volume
         persistentVolumeClaim:
