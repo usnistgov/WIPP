@@ -53,6 +53,9 @@ spec:
         app: wipp-backend-keycloak
     spec:
       serviceAccountName: wipp-backend-keycloak-sa
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - image: WIPP_BACKEND_IMAGE
         name: wipp-backend-keycloak
