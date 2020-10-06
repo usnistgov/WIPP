@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: wipp-backend-keycloak-sa
+  name: wipp-backend-sa
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: wipp-backend-keycloak-role
+  name: wipp-backend-role
 rules:
   - apiGroups: [""]
     resources: ["pods"]
@@ -21,13 +21,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: wipp-backend-keycloak-rb
+  name: wipp-backend-rb
 subjects:
   - kind: ServiceAccount
-    name: wipp-backend-keycloak-sa
+    name: wipp-backend-sa
 roleRef:
   kind: Role
-  name: wipp-backend-keycloak-role
+  name: wipp-backend-role
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps/v1
@@ -38,28 +38,28 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: wipp-backend-keycloak
-  name: wipp-backend-keycloak
+    io.kompose.service: wipp-backend
+  name: wipp-backend
 spec:
   selector:
     matchLabels:
-      app: wipp-backend-keycloak
+      app: wipp-backend
   replicas: 1
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: wipp-backend-keycloak
+        app: wipp-backend
     spec:
-      serviceAccountName: wipp-backend-keycloak-sa
+      serviceAccountName: wipp-backend-sa
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
       containers:
       - image: WIPP_BACKEND_IMAGE
-        name: wipp-backend-keycloak
-        args: ["mongodb", "27017", "wippdata-keycloak-pvc"]
+        name: wipp-backend
+        args: ["mongodb", "27017", "wippdata-pvc"]
         env:
             - name: KEYCLOAK_AUTH_URL
               value: KEYCLOAK_AUTH_URL_VALUE
@@ -82,7 +82,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: wippdata-keycloak-pvc
+          claimName: wippdata-pvc
       restartPolicy: Always
       imagePullSecrets:
       - name: regcred

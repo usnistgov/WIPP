@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    service: wipp-backend-keycloak
-  name: wipp-backend-keycloak
+    service: wipp-backend
+  name: wipp-backend
 spec:
   type: NodePort
   ports:
@@ -16,6 +16,6 @@ spec:
     targetPort: 8080
     nodePort: 30202
   selector:
-    app: wipp-backend-keycloak
+    app: wipp-backend
 status:
   loadBalancer: {}
