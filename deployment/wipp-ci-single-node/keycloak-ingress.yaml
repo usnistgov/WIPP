@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wipp-keycloak
+spec:
+  tls:
+    - hosts:
+      - KEYCLOAK_URL_VALUE
+  rules:
+  - host: KEYCLOAK_URL_VALUE
+    http:
+      paths:
+      - backend:
+          serviceName: wipp-keycloak
+          servicePort: 8080
+

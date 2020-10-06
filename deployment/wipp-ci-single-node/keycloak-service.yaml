@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wipp-keycloak
+  labels:
+    app: wipp-keycloak
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    nodePort: 30103
+  selector:
+    app: wipp-keycloak
+status:
+  loadBalancer: {}
