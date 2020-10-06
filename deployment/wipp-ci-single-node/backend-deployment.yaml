@@ -53,9 +53,6 @@ spec:
         app: wipp-backend
     spec:
       serviceAccountName: wipp-backend-sa
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
       containers:
       - image: WIPP_BACKEND_IMAGE
         name: wipp-backend
