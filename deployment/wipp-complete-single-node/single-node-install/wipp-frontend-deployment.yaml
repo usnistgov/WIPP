@@ -14,7 +14,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: wipp/wipp-frontend:3.0.0-beta2
+      - image: wipp/wipp-frontend:3.0.0
         name: wipp-frontend
         imagePullPolicy: Always
         args: ["wipp-backend", "8080"]
@@ -27,6 +27,8 @@ spec:
           value: "http://localhost:32004"
         - name: TENSORBOARD_URL
           value: "http://localhost:32005"
+        - name: KEYCLOAK_URL
+          value: "http://localhost:32006/auth"
         ports:
         - containerPort: 80
       restartPolicy: Always

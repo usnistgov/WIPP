@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wipp
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  tls:
+    - hosts:
+      - WIPP_URL_VALUE
+  rules:
+  - host: WIPP_URL_VALUE
+    http:
+      paths:
+      - backend:
+          serviceName: wipp-frontend-keycloak
+          servicePort: 80
+

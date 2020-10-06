@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+      name: postgres
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: POSTGRES_DB_VALUE
+        - name: POSTGRES_PASSWORD
+          value: POSTGRES_PASSWORD_VALUE
+        - name: POSTGRES_USER
+          value: POSTGRES_USER_VALUE
+        image: postgres:12
+        name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-data
+        ports:
+        - containerPort: 5432
+        resources: {}
+      restartPolicy: Always
+      volumes:
+      - name: postgres-data
+        hostPath:
+          path: /data/WIPP-postgres
+          type: Directory
+status: {}

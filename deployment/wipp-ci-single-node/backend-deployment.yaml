@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: wipp-backend-sa
+  name: wipp-backend-keycloak-sa
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: wipp-backend-role
+  name: wipp-backend-keycloak-role
 rules:
   - apiGroups: [""]
     resources: ["pods"]
@@ -21,13 +21,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: wipp-backend-rb
+  name: wipp-backend-keycloak-rb
 subjects:
   - kind: ServiceAccount
-    name: wipp-backend-sa
+    name: wipp-backend-keycloak-sa
 roleRef:
   kind: Role
-  name: wipp-backend-role
+  name: wipp-backend-keycloak-role
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: apps/v1
@@ -38,26 +38,35 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: wipp-backend
-  name: wipp-backend
+    io.kompose.service: wipp-backend-keycloak
+  name: wipp-backend-keycloak
 spec:
   selector:
     matchLabels:
-      app: wipp-backend
+      app: wipp-backend-keycloak
   replicas: 1
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: wipp-backend
+        app: wipp-backend-keycloak
     spec:
-      serviceAccountName: wipp-backend-sa
+      serviceAccountName: wipp-backend-keycloak-sa
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
       - image: WIPP_BACKEND_IMAGE
-        name: wipp-backend
-        args: ["mongodb", "27017", "wippdata-pvc"]
+        name: wipp-backend-keycloak
+        args: ["mongodb", "27017", "wippdata-keycloak-pvc"]
         env:
+            - name: KEYCLOAK_AUTH_URL
+              value: KEYCLOAK_AUTH_URL_VALUE
+            - name: KEYCLOAK_SSL_REQUIRED
+              value: KEYCLOAK_SSL_REQUIRED_VALUE
+            - name: KEYCLOAK_DISABLE_TRUST_MANAGER
+              value: KEYCLOAK_DISABLE_TRUST_MANAGER_VALUE
             - name: ELASTIC_APM_SERVER_URLS
               value: ELASTIC_APM_SERVER_URLS_VALUE
             - name: ELASTIC_APM_SERVICE_NAME
@@ -73,7 +82,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: wippdata-pvc
+          claimName: wippdata-keycloak-pvc
       restartPolicy: Always
       imagePullSecrets:
       - name: regcred

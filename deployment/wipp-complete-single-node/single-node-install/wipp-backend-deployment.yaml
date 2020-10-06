@@ -58,10 +58,17 @@ spec:
     spec:
       serviceAccountName: wipp-backend-sa
       containers:
-        - image: wipp/wipp-backend:3.0.0-beta2
+        - image: wipp/wipp-backend:3.0.0
           name: wipp-backend
           imagePullPolicy: Always
           args: ["wipp-mongo", "27017", "wipp-pv-claim"]
+          env:
+            - name: KEYCLOAK_AUTH_URL
+              value: "http://localhost:32006/auth"
+            - name: KEYCLOAK_SSL_REQUIRED
+              value: "external"
+            - name: KEYCLOAK_DISABLE_TRUST_MANAGER
+              value: "false"
           volumeMounts:
             - mountPath: /data/WIPP-plugins
               name: data

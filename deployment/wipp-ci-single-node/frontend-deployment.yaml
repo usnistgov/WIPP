@@ -6,27 +6,29 @@ metadata:
     kompose.version: 1.16.0 (0c01309)
   creationTimestamp: null
   labels:
-    io.kompose.service: wipp-frontend
-  name: wipp-frontend
+    io.kompose.service: wipp-frontend-keycloak
+  name: wipp-frontend-keycloak
 spec:
   selector:
     matchLabels:
-      app: wipp-frontend
+      app: wipp-frontend-keycloak
   replicas: 1
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: wipp-frontend
+        app: wipp-frontend-keycloak
     spec:
       containers:
       - image: WIPP_FRONTEND_IMAGE
-        name: wipp-frontend
-        args: ["wipp-backend", "8080"]
+        name: wipp-frontend-keycloak
+        args: ["wipp-backend-keycloak", "8080"]
         env:
         - name: ARGOUIBASE_URL
           value: ARGOUIBASE_URL_VALUE
+        - name: KEYCLOAK_URL
+          value: KEYCLOAK_URL_VALUE
         - name: TENSORBOARD_URL
           value: TENSORBOARD_URL_VALUE
         - name: JUPYTERHUB_URL
@@ -34,7 +36,10 @@ spec:
         - name: VISIONUI_URL
           value: VISIONUI_URL_VALUE
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
         resources: {}
       restartPolicy: Always
       imagePullSecrets:
