@@ -15,14 +15,16 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 
 All of these sets of instructions assume that you have cloned or downloaded this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
-### Upgrading from WIPP 3.0.0-beta/beta.1 to WIPP-3.0.0-beta2
+### Upgrading from WIPP 3.0.0-beta WIPP-3.0.0
 
-If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.0-beta2, please follow the upgrade instructions according to your installation setup:
+If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.0, please follow the upgrade instructions according to your installation setup:
 
-- [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 8
-- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 8
-- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 8
-- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 10
+- [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 9
+- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 9
+- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 9
+- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 11
+
+*Coming soon*: database migration script
 
 These instructions assume that you have pulled or downloaded the latest version of this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
@@ -32,7 +34,8 @@ Kubernetes require to specify the volume size before deploying apps. `wipp-singl
 
 | Volume name                                         | Purpose                                    | Default size |
 |-----------------------------------------------------|--------------------------------------------|--------------|
-| [`mongo-pv-claim`](wipp-single-node.yaml#L154)     | MongoDB database for WIPP                  | 1Gi          |
+| [`mongo-pv-claim`](wipp-single-node.yaml#L157)     | MongoDB database for WIPP                  | 1Gi          |
+| [`postgres-pv-claim`](wipp-single-node.yaml#L214)     | Postgres database for WIPP-Keycloak     | 1Gi          |
 | [`wipp-pv-claim`](wipp-single-node.yaml#L554)      | WIPP storage for images and data           | 20Gi         |
 | [`notebooks-pv-claim`](wipp-single-node.yaml#L989) | Shared storage for all Notebook users      | 5Gi          |
 | [`claim-{username}`](wipp-single-node.yaml#L532)   | Individual storage for each Notebook users | 1Gi          |
@@ -43,10 +46,18 @@ Kubernetes require to specify the volume size before deploying apps. `wipp-singl
 2. Once installed, click on the Docker logo and choose **Preferences** → **Advanced**. Depending on your Mac configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP (and all Docker containers).
 3. After that go to **Preferences** → **Kubernetes** → **Enable Kubernetes**. Wait for the *Kubernetes is running* status and the green indicator in the bottom right corner of the window.
 4. Find the ip address of your Mac on the local network: click **Network** <img src="https://icon-library.net/images/mac-wifi-icon/mac-wifi-icon-23.jpg" width="10"> → **Open Network Preferences …** and copy the IP address from this line: *Wi-Fi is connected to <WIFI_NAME> and has the IP address x.x.x.x*.
-5. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
+5. Replace all occurences of `localhost` in `wipp-single-node.yaml` and `wipp-realm.json` to the IP address from previous step: `x.x.x.x`. 
+Example with `gsed` (remember to replace `x.x.x.x` by the actual IP value):
+
+```sh
+gsed -i 's|localhost|x.x.x.x|g' wipp-single-node.yaml
+gsed -i 's|localhost|x.x.x.x|g' wipp-realm.json
+```
+
 6. Deploy WIPP. Open the terminal and run:
 
 ```
+kubectl create secret generic wipp-realm-secret --from-file=wipp-realm.json
 kubectl apply -f wipp-single-node.yaml
 ```
 
@@ -62,6 +73,7 @@ Output should be similar to this one for the pods starting with `wipp-`:
 NAME                             READY   STATUS      RESTARTS   AGE
 wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
 wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-keycloak-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
 wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 ```
 
@@ -71,6 +83,9 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
+   * Keycloak: x.x.x.x:32006
+   
+9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
 
 ### macOS (with Multipass+microk8s)
 
@@ -100,10 +115,18 @@ multipass exec wipp -- /snap/bin/microk8s.enable storage
 multipass info wipp | grep IP
 > IPv4:           x.x.x.x
 ```
-5. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
+5. Replace all occurences of `localhost` in `wipp-single-node.yaml` and `wipp-realm.json` to the IP address from previous step: `x.x.x.x`.
+Example with `gsed` (remember to replace `x.x.x.x` by the actual IP value):
+
+```sh
+gsed -i 's|localhost|x.x.x.x|g' wipp-single-node.yaml
+gsed -i 's|localhost|x.x.x.x|g' wipp-realm.json
+```
+
 6. Copy the Kubernetes config and deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 ```
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
+kubectl --kubeconfig=kubeconfig create secret generic wipp-realm-secret --from-file=wipp-realm.json
 kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
 
@@ -119,6 +142,7 @@ Output should be similar to this one for the pods starting with `wipp-`:
 NAME                             READY   STATUS      RESTARTS   AGE
 wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
 wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-keycloak-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
 wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 ```
 
@@ -128,6 +152,9 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
+   * Keycloak: x.x.x.x:32006
+
+9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
 
 
 ### Linux (Multipass+microk8s)
@@ -158,10 +185,18 @@ multipass exec wipp -- /snap/bin/microk8s.enable storage
 multipass info wipp | grep IP
 > IPv4:           x.x.x.x
 ```
-5. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
+5. Replace all occurences of `localhost` in `wipp-single-node.yaml` and `wipp-realm.json` to the IP address from previous step: `x.x.x.x`.
+Example with `sed` (remember to replace `x.x.x.x` by the actual IP value):
+
+```sh
+sed -i 's|localhost|x.x.x.x|g' wipp-single-node.yaml
+sed -i 's|localhost|x.x.x.x|g' wipp-realm.json
+```
+
 6. Copy the Kubernetes config and deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/):
 ```
 multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
+kubectl --kubeconfig=kubeconfig create secret generic wipp-realm-secret --from-file=wipp-realm.json
 kubectl --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
 
@@ -177,6 +212,7 @@ Output should be similar to this one for the pods starting with `wipp-`:
 NAME                             READY   STATUS      RESTARTS   AGE
 wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
 wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-keycloak-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
 wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 ```
 
@@ -186,6 +222,9 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
+   * Keycloak: x.x.x.x:32006
+
+9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
 
 
 ### Windows 10 (Multipass+microk8s)
@@ -225,10 +264,11 @@ multipass info wipp
 ```
 Copy the IP address `x.x.x.x`.
 
-7. Replace all occurences of `localhost` in `wipp-single-node.yaml` to the IP address from previous step: `x.x.x.x`.
+7. Replace all occurences of `localhost` in `wipp-single-node.yaml` and `wipp-realm.json` to the IP address from previous step: `x.x.x.x`.
 
 8. Deploy WIPP (install `kubectl` if not present: https://kubernetes.io/docs/tasks/tools/install-kubectl/):
 ```
+kubectl --kubeconfig=kubeconfig create secret generic wipp-realm-secret --from-file=wipp-realm.json
 kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 ```
 
@@ -244,6 +284,7 @@ Output should be similar to this one for the pods starting with `wipp-`:
 NAME                             READY   STATUS      RESTARTS   AGE
 wipp-backend-xxxxxxxxxx-xxxxx    1/1     Running     0          5m
 wipp-frontend-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
+wipp-keycloak-xxxxxxxxxx-xxxxx   1/1     Running     0          5m
 wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 ```
 
@@ -253,6 +294,10 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Notebooks: x.x.x.x:32003
    * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
+   * Keycloak: x.x.x.x:32006
+
+11. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
+
 
 ## Teardown
 

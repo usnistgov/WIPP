@@ -16,24 +16,24 @@ spec:
     spec:
       containers:
       - args:
-        - -b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm.json
+        - -b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/wipp-realm.json
         env:
         - name: DB_ADDR
-          value: postgres
+          value: "postgres"
         - name: DB_DATABASE
-          value: keycloak
+          value: "keycloak"
         - name: DB_PASSWORD
-          value: password
+          value: "password"
         - name: DB_SCHEMA
-          value: public
+          value: "public"
         - name: DB_USER
-          value: keycloak
+          value: "keycloak"
         - name: DB_VENDOR
-          value: POSTGRES
+          value: "POSTGRES"
         - name: KEYCLOAK_PASSWORD
-          value: admin
+          value: "admin"
         - name: KEYCLOAK_USER
-          value: admin
+          value: "admin"
         - name:  PROXY_ADDRESS_FORWARDING
           value: "true"
         image: quay.io/keycloak/keycloak:11.0.2

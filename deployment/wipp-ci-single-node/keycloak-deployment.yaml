@@ -23,17 +23,17 @@ spec:
         - name: DB_DATABASE
           value: keycloak
         - name: DB_PASSWORD
-          value: password
+          value: DB_PASSWORD_VALUE
         - name: DB_SCHEMA
           value: public
         - name: DB_USER
-          value: keycloak
+          value: DB_USER_VALUE
         - name: DB_VENDOR
           value: POSTGRES
         - name: KEYCLOAK_PASSWORD
-          value: admin
+          value: KEYCLOAK_PASSWORD_VALUE
         - name: KEYCLOAK_USER
-          value: admin
+          value: KEYCLOAK_USER_VALUE
         - name:  PROXY_ADDRESS_FORWARDING
           value: "true"
         image: quay.io/keycloak/keycloak:11.0.2

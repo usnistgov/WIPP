@@ -750,12 +750,12 @@
       "clientAuthenticatorType": "client-secret",
       "secret": "**********",
       "redirectUris": [
-        "http://localhost:4200/*",
-        "https://localhost:4200/*"
+        "http://localhost:32001/*",
+        "https://localhost:32001/*"
       ],
       "webOrigins": [
-        "https://localhost:4200",
-        "http://localhost:4200"
+        "https://localhost:32001",
+        "http://localhost:32001"
       ],
       "notBefore": 0,
       "bearerOnly": false,

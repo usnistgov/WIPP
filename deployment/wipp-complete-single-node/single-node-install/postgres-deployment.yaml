@@ -41,6 +41,16 @@ spec:
           name: postgres-data
         ports:
         - containerPort: 5432
+        readinessProbe:
+          exec:
+            command:
+            - psql
+            - -U
+            - keycloak
+            - -c
+            - SELECT 1
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
         resources: {}
       restartPolicy: Always
       volumes:

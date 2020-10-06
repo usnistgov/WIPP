@@ -17,11 +17,11 @@ spec:
       containers:
       - env:
         - name: POSTGRES_DB
-          value: keycloak
+          value: POSTGRES_DB_VALUE
         - name: POSTGRES_PASSWORD
-          value: password
+          value: POSTGRES_PASSWORD_VALUE
         - name: POSTGRES_USER
-          value: keycloak
+          value: POSTGRES_USER_VALUE
         image: postgres:12
         name: postgres
         volumeMounts:

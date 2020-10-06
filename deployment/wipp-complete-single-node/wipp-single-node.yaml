@@ -58,7 +58,7 @@ spec:
     spec:
       serviceAccountName: wipp-backend-sa
       containers:
-        - image: wipp/wipp-backend:3.0.0-rc1
+        - image: wipp/wipp-backend:3.0.0
           name: wipp-backend
           imagePullPolicy: Always
           args: ["wipp-mongo", "27017", "wipp-pv-claim"]
@@ -115,7 +115,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: wipp/wipp-frontend:3.0.0-rc1
+      - image: wipp/wipp-frontend:3.0.0
         name: wipp-frontend
         imagePullPolicy: Always
         args: ["wipp-backend", "8080"]
@@ -254,6 +254,16 @@ spec:
           name: postgres-data
         ports:
         - containerPort: 5432
+        readinessProbe:
+          exec:
+            command:
+            - psql
+            - -U
+            - keycloak
+            - -c
+            - SELECT 1
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
         resources: {}
       restartPolicy: Always
       volumes:
@@ -294,24 +304,24 @@ spec:
     spec:
       containers:
       - args:
-        - -b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm.json
+        - -b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/wipp-realm.json
         env:
         - name: DB_ADDR
-          value: postgres
+          value: "postgres"
         - name: DB_DATABASE
-          value: keycloak
+          value: "keycloak"
         - name: DB_PASSWORD
-          value: password
+          value: "password"
         - name: DB_SCHEMA
-          value: public
+          value: "public"
         - name: DB_USER
-          value: keycloak
+          value: "keycloak"
         - name: DB_VENDOR
-          value: POSTGRES
+          value: "POSTGRES"
         - name: KEYCLOAK_PASSWORD
-          value: admin
+          value: "admin"
         - name: KEYCLOAK_USER
-          value: admin
+          value: "admin"
         - name:  PROXY_ADDRESS_FORWARDING
           value: "true"
         image: quay.io/keycloak/keycloak:11.0.2
