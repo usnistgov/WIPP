@@ -16,3 +16,9 @@ The information about the pyramid includes name, creation date and the source py
 *Figure 2: WIPP Pyramid detail screenshot*
 
 For an in-depth user manual of the deep zoom view of pyramids, see [this webpage](https://isg.nist.gov/deepzoomweb/help#image-view-web-deep-zoom-toolkit) (please note that some of deep zoom tools are not available in WIPP, such as colony searching and features).
+
+# Change Pyramid visibility to Public
+
+A Pyramid visibility can be changed to "Public" by clicking on the user group icon on the right. 
+Public visibility means that the pyramid can be seen by all connected and anonymous users, and can be used by other connected users in workflows. It cannot be modified or deleted by other users, except for admin users.
+Once a pyramid is Public, its visibility can not be changed back to Private.

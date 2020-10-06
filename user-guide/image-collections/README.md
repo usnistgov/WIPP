@@ -74,3 +74,12 @@ Note: if the collection is locked, neither the collection nor individual images 
 
 Before any image collection is processed by a WIPP job, it must be locked to guarantee traceability of any results back to the source collection. The collection can be locked using the "lock" button from the top right corner of the view.
 Note: If a collection is locked, neither the entire collection nor individual images in the collection can be deleted or modified. However, the image collection name can still be modified, and the change will be reflected in any job using the image collection.
+
+# Change Image Collection visibility to Public
+
+Once an Image Collection is locked, its visibility can be changed to "Public" by clicking on the user group icon on the right. 
+Public visibility means that the collection can be seen and downloaded by all connected and anonymous users, and can be used by other connected users in workflows. It cannot be modified or deleted by other users, except for admin users.
+Once a collection is Public, its visibility can not be changed back to Private.
+
+![](make-public.png)
+*Figure 6: WIPP Image Collection make public screenshot*

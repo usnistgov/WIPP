@@ -56,3 +56,9 @@ Note: If a collection is locked, neither the entire collection nor individual CS
 # Visualize CSV plots in plots UI
 
 You can visualize the CSVs of the current collection directly in the Plots UI by clicking  the "Visualize in Plots UI" button located in the top right corner of the page.
+
+# Change CSV Collection visibility to Public
+
+Once a CSV Collection is locked, its visibility can be changed to "Public" by clicking on the user group icon on the right. 
+Public visibility means that the collection can be seen and downloaded by all connected and anonymous users, and can be used by other connected users in workflows. It cannot be modified or deleted by other users, except for admin users.
+Once a collection is Public, its visibility can not be changed back to Private.

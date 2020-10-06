@@ -39,3 +39,9 @@ The different layers of the pyramid visualization can be configured in the confi
 *Figure 4: WIPP Pyramid visualization deep zoom view screenshot*
 
 For an in-depth user manual of the deep zoom view of pyramids, see [this webpage](https://isg.nist.gov/deepzoomweb/help#image-view-web-deep-zoom-toolkit) (please note that some of deep zoom tools are not available in WIPP, such as colony searching and features).
+
+# Change Pyramid visualization visibility to Public
+
+A visualization visibility can be changed to "Public" by clicking on the user group icon on the right. 
+Public visibility means that the visualization can be seen all connected and anonymous users. It cannot be modified or deleted by other users, except for admin users.
+Once a visualization is Public, its visibility can not be changed back to Private.

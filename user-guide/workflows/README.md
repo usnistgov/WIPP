@@ -112,3 +112,9 @@ The left box color of each task is:
 
 ![alt text](argo.png)
 *Figure 10: Progress of a workflow in Argo*
+
+# Change Workflow visibility to Public
+
+If a workflow was successful, its visibility can be changed to "Public" by clicking on the user group icon on the right. 
+Public visibility means that the workflow and all generated outputs can be seen and downloaded by all connected and anonymous users, and can be used by other connected users in workflows. It cannot be modified or deleted by other users, except for admin users.
+Once a Workflow is Public, its visibility can not be changed back to Private.
