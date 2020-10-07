@@ -1,0 +1,189 @@
+### Configure database migration script
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wipp-migrate-database-v3-0-0
+data:
+  wipp-migrate-database-v3-0-0.js: |
+    db.imagesCollection.update(
+    {
+        owner: { $exists: false }
+    }, 
+    {
+        $set: {
+            owner: "wipp-beta-user",
+            publiclyShared: true        }
+    }, 
+    {
+        multi: true
+    }
+    );
+    db.csvCollection.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.pyramid.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.pyramidAnnotation.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.stitchingVector.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.tensorboardLogs.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.tensorflowModel.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.visualization.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.notebook.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.genericData.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.job.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+    db.workflow.update(
+        {
+            owner: { $exists: false }
+        }, 
+        {
+            $set: {
+                owner: "wipp-beta-user",
+                publiclyShared: true        }
+        }, 
+        {
+            multi: true
+        }
+    );
+---
+### Run a job to perform database migration from WIPP beta to WIPP 3.0.0
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wipp-migrate-database-v3-0-0
+spec:
+  template:
+    spec:
+      containers:
+      - name: wipp-migrate-database-v3-0-0
+        image: mongo:3.6
+        command: [ "mongo", "wipp-mongo:27017/wipp", "/scripts/wipp-migrate-database-v3-0-0.js" ]
+        volumeMounts:
+          - name: wipp-database-migration-scripts
+            mountPath: /scripts
+      volumes:
+      - name: wipp-database-migration-scripts
+        configMap:
+          name: wipp-migrate-database-v3-0-0
+          items:
+          - key: wipp-migrate-database-v3-0-0.js
+            path: wipp-migrate-database-v3-0-0.js
+      restartPolicy: Never
+  backoffLimit: 4
+---

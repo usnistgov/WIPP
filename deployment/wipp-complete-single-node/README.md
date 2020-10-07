@@ -15,16 +15,14 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 
 All of these sets of instructions assume that you have cloned or downloaded this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
-### Upgrading from WIPP 3.0.0-beta WIPP-3.0.0
+### Upgrading from WIPP 3.0.0-beta/beta2 WIPP-3.0.0
 
 If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.0, please follow the upgrade instructions according to your installation setup:
 
-- [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 9
-- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 9
-- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 9
-- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 11
-
-*Coming soon*: database migration script
+- [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 10
+- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 10
+- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 10
+- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 12
 
 These instructions assume that you have pulled or downloaded the latest version of this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
@@ -86,6 +84,12 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Keycloak: x.x.x.x:32006
    
 9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
+
+10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+
+```
+kubectl apply -f wipp-database-migration-3.0.0.yaml
+```
 
 ### macOS (with Multipass+microk8s)
 
@@ -156,6 +160,11 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 
 9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
 
+10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+
+```
+kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
+```
 
 ### Linux (Multipass+microk8s)
 
@@ -226,6 +235,11 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 
 9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
 
+10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+
+```
+kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
+```
 
 ### Windows 10 (Multipass+microk8s)
 Make sure you have Windows 10 Pro, Enterprise or Education to use the standard Multipass installation with Hyper-V; Windows 10 Home is not supported and will require an installation of VirtualBox.
@@ -298,6 +312,11 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 
 11. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
 
+12. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+
+```
+kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
+```
 
 ## Teardown
 
