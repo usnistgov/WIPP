@@ -83,7 +83,7 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
    
-9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
+9. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
 10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
 
@@ -158,7 +158,7 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
 
-9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
+9. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
 10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
 
@@ -233,7 +233,7 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
 
-9. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
+9. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
 10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
 
@@ -310,7 +310,7 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
 
-11. Follow the [Post-installation instructions](wipp-post-installation-notes.md) to set up a WIPP admin user and start user WIPP.
+11. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
 12. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
 
