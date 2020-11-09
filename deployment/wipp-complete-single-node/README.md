@@ -17,12 +17,23 @@ All of these sets of instructions assume that you have cloned or downloaded this
 
 ### Upgrading from WIPP 3.0.0-beta/beta2 WIPP-3.0.0
 
-If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.0, please follow the upgrade instructions according to your installation setup:
+If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.1, please follow the upgrade instructions according to your installation setup:
 
 - [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 10
 - [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 10
 - [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 10
 - [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 12
+
+These instructions assume that you have pulled or downloaded the latest version of this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
+
+### Upgrading from WIPP 3.0.0
+
+If you already have a running instance of WIPP 3.0.0 and want to upgrade to WIPP 3.0.1 (recommended), please follow the upgrade instructions according to your installation setup:
+
+- [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 8
+- [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 8
+- [Linux (Multipass+microk8s)](#linux-multipassmicrok8s) - follow steps 4 to 8
+- [Windows 10 (Multipass+microk8s)](#windows-10-multipassmicrok8s) - follow steps 5 to 10
 
 These instructions assume that you have pulled or downloaded the latest version of this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 

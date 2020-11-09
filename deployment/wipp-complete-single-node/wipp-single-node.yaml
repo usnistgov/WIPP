@@ -58,7 +58,7 @@ spec:
     spec:
       serviceAccountName: wipp-backend-sa
       containers:
-        - image: wipp/wipp-backend:3.0.0
+        - image: wipp/wipp-backend:3.0.1
           name: wipp-backend
           imagePullPolicy: Always
           args: ["wipp-mongo", "27017", "wipp-pv-claim"]
@@ -115,7 +115,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: wipp/wipp-frontend:3.0.0
+      - image: wipp/wipp-frontend:3.0.1
         name: wipp-frontend
         imagePullPolicy: Always
         args: ["wipp-backend", "8080"]
@@ -202,7 +202,7 @@ kind: Service
 metadata:
   name: wipp-mongo
 spec:
-  type: NodePort
+  type: ClusterIp
   ports:
   - name: http
     port: 27017
