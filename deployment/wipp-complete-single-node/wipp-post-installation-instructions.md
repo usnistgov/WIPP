@@ -24,7 +24,7 @@ Once WIPP has been installed, you need to create a WIPP administrator user in Ke
 ![](screenshots/keycloak-user-set-password.png)
 *Figure 4: WIPP Keycloak set user password*
 
-5. Open the "Role Mappings" tab, select "admin" under "Availbale Roles" and click on "Add selected"
+5. Open the "Role Mappings" tab, select "admin" under "Available Roles" and click on "Add selected"
 
 ![](screenshots/keycloak-user-set-role.png)
 *Figure 5: WIPP Keycloak set user role*
