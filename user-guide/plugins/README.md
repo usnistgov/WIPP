@@ -5,7 +5,7 @@ You can browse the different pages and change the number of plugins displayed pe
 We provide filters to sort plugins by name and to search a plugin by its name.
 
 From this page you can:
-* click on "new plugin" to create a [new plugin](#new-plugin)
+* click on "new plugin" to create a [new plugin](#new-plugin) (*WIPP admin only*)
 * click on a plugin and see its [details](#plugin-details)
 
 ![alt text](plugin_list.png)
@@ -14,7 +14,7 @@ From this page you can:
 
 # New Plugin
 
-The "New plugin" button opens a pop up that allows the user to register a new plugin using its manifest (JSON format). 
+The "New plugin" button opens a pop up that allows the WIPP admin user to register a new plugin using its manifest (JSON format). 
 We handle three different ways of creating a new plugin: 
 
 * browse file from local directory (only plain txt and json files are accepted)

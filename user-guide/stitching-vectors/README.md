@@ -31,3 +31,9 @@ The information about stitching vectors includes name, creation date, the statis
 # Download time slices
 
 Each time slice in a stitching vector can be downloaded using the download button with the arrow icon from the "Actions" column. 
+
+# Change Stitching Vector visibility to Public
+
+A Stitching Vector visibility can be changed to "Public" by clicking on the user group icon on the right. 
+Public visibility means that the collection can be seen and downloaded by all connected and anonymous users, and can be used by other connected users in workflows. It cannot be modified or deleted by other users, except for admin users.
+Once a collection is Public, its visibility can not be changed back to Private.
