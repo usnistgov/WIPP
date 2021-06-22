@@ -39,5 +39,5 @@ The WIPP team provides the following plugins for the WIPP system:
 
 | Name        | Repository           | Plugin manifest  |
 | ------------- |:-------------:| :-----:|
-| Mask R-CNN Image Classification Training      | [Github](https://github.com/usnistgov/WIPP-mrcnn-training-plugin) | [manifest](https://github.com/usnistgov/WIPP-mrcnn-training-plugin/blob/main/plugin.json) |
-| Mask R-CNN Image Classification Inference      | [Github](https://github.com/usnistgov/WIPP-mrcnn2-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-mrcnn2-inference-plugin/blob/main/plugin.json) |
+| Mask R-CNN Image Instance Segmentation Training      | [Github](https://github.com/usnistgov/WIPP-mrcnn-training-plugin) | [manifest](https://github.com/usnistgov/WIPP-mrcnn-training-plugin/blob/main/plugin.json) |
+| Mask R-CNN Image Instance Segmentation Inference      | [Github](https://github.com/usnistgov/WIPP-mrcnn2-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-mrcnn2-inference-plugin/blob/main/plugin.json) |
