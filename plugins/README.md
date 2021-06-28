@@ -34,3 +34,10 @@ The WIPP team provides the following plugins for the WIPP system:
 | ------------- |:-------------:| :-----:|
 | Resnet50 Image Classification Training      | [Github](https://github.com/usnistgov/image-classification-resnet50) | [manifest](https://github.com/usnistgov/image-classification-resnet50/blob/master/pluginTraining.json) |
 | Resnet50 Image Classification Inference      | [Github](https://github.com/usnistgov/image-classification-resnet50) | [manifest](https://github.com/usnistgov/image-classification-resnet50/blob/master/pluginInference.json) |
+
+**Mask Region based Convolution Neural Networks - segmentation plugins (GPU support required)**
+
+| Name        | Repository           | Plugin manifest  |
+| ------------- |:-------------:| :-----:|
+| Mask R-CNN Image Instance Segmentation Training      | [Github](https://github.com/usnistgov/WIPP-mrcnn-training-plugin) | [manifest](https://github.com/usnistgov/WIPP-mrcnn-training-plugin/blob/main/plugin.json) |
+| Mask R-CNN Image Instance Segmentation Inference      | [Github](https://github.com/usnistgov/WIPP-mrcnn2-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-mrcnn2-inference-plugin/blob/main/plugin.json) |
