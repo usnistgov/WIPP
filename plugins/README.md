@@ -47,3 +47,4 @@ The WIPP team provides the following plugins for the WIPP system:
 | Name        | Repository           | Plugin manifest  |
 | ------------- |:-------------:| :-----:|
 | Feature Pyramid Networks Image Instance Segmentation Inference   | [Github](https://github.com/usnistgov/WIPP-fpn-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-fpn-inference-plugin/blob/main/plugin.json) |
+
