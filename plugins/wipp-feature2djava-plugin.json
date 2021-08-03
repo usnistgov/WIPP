@@ -1,15 +1,21 @@
 {
   "name": "WIPP Feature2DJava Plugin",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "title": "WIPP Feature2DJava Plugin",
   "description": "WIPP 2D Grayscale Image Feature Extraction (Java)",
-  "containerId": "wipp/wipp-feature2djava-plugin:1.4.0",
+  "containerId": "wipp/wipp-feature2djava-plugin:1.5.0",
   "inputs": [
     {
-      "name": "imageDir",
+      "name": "imagesDir",
       "type": "collection",
       "required": "true",
       "description": "Images images (raw)"
+    },
+    {
+      "name": "imagesPattern",
+      "type": "string",
+      "required": "true",
+      "description": "Image names pattern (regular expression)"
     },
     {
       "name": "partitionsDir",
@@ -18,13 +24,7 @@
       "description": "Images partitions (masks)"
     },
     {
-      "name": "iP",
-      "type": "string",
-      "required": "true",
-      "description": "Image names pattern (regular expression)"
-    },
-    {
-      "name": "pP",
+      "name": "partitionsPattern",
       "type": "string",
       "required": "false",
       "description": "Mask names pattern (regular expression)"
@@ -38,41 +38,42 @@
             "title": "Select feature",
             "oneOf": 
                 [
-                    { "description": "Area", "enum": [ "Feature2DJava_Area" ] }, 
-                    { "description": "Mean", "enum": [ "Feature2DJava_Mean" ] }, 
-                    { "description": "Aspect Ratio BB", "enum": [ "Feature2DJava_Aspect_Ratio_BB" ] }, 
-                    { "description": "Bounding Box", "enum": [ "Feature2DJava_Bounding_Box" ] }, 
-                    { "description": "Center BB", "enum": [ "Feature2DJava_Center_BB" ] }, 
-                    { "description": "Centroid", "enum": [ "Feature2DJava_Centroid" ] }, 
-                    { "description": "Circularity", "enum": [ "Feature2DJava_Circularity" ] }, 
-                    { "description": "Distance From Border", "enum": [ "Feature2DJava_Distance_From_Border" ] }, 
-                    { "description": "Eccentricity", "enum": [ "Feature2DJava_Eccentricity" ] }, 
-                    { "description": "Entropy", "enum": [ "Feature2DJava_Entropy" ] }, 
-                    { "description": "ExtendBB", "enum": [ "Feature2DJava_ExtendBB" ] }, 
-                    { "description": "Median", "enum": [ "Feature2DJava_Median" ] }, 
-                    { "description": "Mode", "enum": [ "Feature2DJava_Mode" ] },
-                    { "description": "Orientation", "enum": [ "Feature2DJava_Orientation" ] },
-                    { "description": "Perimeter", "enum": [ "Feature2DJava_Perimeter" ] },
-                    { "description": "StandardDeviation", "enum": [ "Feature2DJava_StandardDeviation" ] },
-                    { "description": "Skewness", "enum": [ "Feature2DJava_Skewness" ] },
-                    { "description": "Kurtosis", "enum": [ "Feature2DJava_Kurtosis" ] },
-                    { "description": "Hyperskewness", "enum": [ "Feature2DJava_Hyperskewness" ] },
-                    { "description": "Hyperflatness", "enum": [ "Feature2DJava_Hyperflatness" ] },
-                    { "description": "TContrast", "enum": [ "Feature2DJava_TContrast" ] },
-                    { "description": "TCorrelation", "enum": [ "Feature2DJava_TCorrelation" ] },
-                    { "description": "THomogeneity", "enum": [ "Feature2DJava_THomogeneity" ] },
-                    { "description": "TEnergy", "enum": [ "Feature2DJava_TEnergy" ] },
-                    { "description": "TVariance", "enum": [ "Feature2DJava_TVariance" ] },
-                    { "description": "TEntropy", "enum": [ "Feature2DJava_TEntropy" ] },
-                    { "description": "TInvDiffMoment", "enum": [ "Feature2DJava_TInvDiffMoment" ] },
-                    { "description": "TSumAverage", "enum": [ "Feature2DJava_TSumAverage" ] },
-                    { "description": "TSumVariance", "enum": [ "Feature2DJava_TSumVariance" ] },
-                    { "description": "TSumEntropy", "enum": [ "Feature2DJava_TSumEntropy" ] },
-                    { "description": "TDiffAverage", "enum": [ "Feature2DJava_TDiffAverage" ] },
-                    { "description": "TDiffVariance", "enum": [ "Feature2DJava_TDiffVariance" ] },
-                    { "description": "TDiffEntropy", "enum": [ "Feature2DJava_TDiffEntropy" ] }
+                    { "description": "Area", "enum": [ "Area" ] }, 
+                    { "description": "Mean", "enum": [ "Mean" ] }, 
+                    { "description": "Aspect Ratio BB", "enum": [ "Aspect_Ratio_BB" ] }, 
+                    { "description": "Bounding Box", "enum": [ "Bounding_Box" ] }, 
+                    { "description": "Center BB", "enum": [ "Center_BB" ] }, 
+                    { "description": "Centroid", "enum": [ "Centroid" ] }, 
+                    { "description": "Circularity", "enum": [ "Circularity" ] }, 
+                    { "description": "Distance From Border", "enum": [ "Distance_From_Border" ] }, 
+                    { "description": "Eccentricity", "enum": [ "Eccentricity" ] }, 
+                    { "description": "Entropy", "enum": [ "Entropy" ] }, 
+                    { "description": "ExtendBB", "enum": [ "ExtendBB" ] }, 
+                    { "description": "Mean", "enum": [ "Mean" ] }, 
+                    { "description": "Median", "enum": [ "Median" ] }, 
+                    { "description": "Mode", "enum": [ "Mode" ] },
+                    { "description": "Orientation", "enum": [ "Orientation" ] },
+                    { "description": "Perimeter", "enum": [ "Perimeter" ] },
+                    { "description": "StandardDeviation", "enum": [ "StandardDeviation" ] },
+                    { "description": "Skewness", "enum": [ "Skewness" ] },
+                    { "description": "Kurtosis", "enum": [ "Kurtosis" ] },
+                    { "description": "Hyperskewness", "enum": [ "Hyperskewness" ] },
+                    { "description": "Hyperflatness", "enum": [ "Hyperflatness" ] },
+                    { "description": "TContrast", "enum": [ "TContrast" ] },
+                    { "description": "TCorrelation", "enum": [ "TCorrelation" ] },
+                    { "description": "THomogeneity", "enum": [ "THomogeneity" ] },
+                    { "description": "TEnergy", "enum": [ "TEnergy" ] },
+                    { "description": "TVariance", "enum": [ "TVariance" ] },
+                    { "description": "TEntropy", "enum": [ "TEntropy" ] },
+                    { "description": "TInvDiffMoment", "enum": [ "TInvDiffMoment" ] },
+                    { "description": "TSumAverage", "enum": [ "TSumAverage" ] },
+                    { "description": "TSumVariance", "enum": [ "TSumVariance" ] },
+                    { "description": "TSumEntropy", "enum": [ "TSumEntropy" ] },
+                    { "description": "TDiffAverage", "enum": [ "TDiffAverage" ] },
+                    { "description": "TDiffVariance", "enum": [ "TDiffVariance" ] },
+                    { "description": "TDiffEntropy", "enum": [ "TDiffEntropy" ] }
                 ], 
-            "default": "Feature2DJava_Area",
+            "default": "Area",
             "widget": "select" ,    
             "minItems": 1, 
             "uniqueItems": "true"
@@ -91,7 +92,7 @@
   ],
   "ui": [
     {
-      "key": "inputs.imageDir",
+      "key": "inputs.imagesDir",
       "title": "Input Images: ",
       "description": "Pick a collection..."
     },
@@ -101,11 +102,11 @@
       "description": "Pick a collection..."
     },
     {
-      "key": "inputs.iP",
+      "key": "inputs.imagesPattern",
       "title": "Image names pattern (regular expression): ",
       "description": "Filename pattern..."
     },{
-      "key": "inputs.pP",
+      "key": "inputs.partitionsPattern",
       "title": "Mask names pattern (regular expression): ",
       "description": "Filename pattern..."
     },
@@ -119,15 +120,15 @@
             {
               "title": "Input images",
               "fields": [
-                "imageDir",
-                "iP"
+                "imagesDir",
+                "imagesPattern"
               ]
             },
             {
               "title": "Input masks",
               "fields": [
                 "partitionsDir",
-                "pP"
+                "partitionsPattern"
               ]
             },
             {
@@ -139,4 +140,5 @@
         ]
     }
   ]
+    
 }
