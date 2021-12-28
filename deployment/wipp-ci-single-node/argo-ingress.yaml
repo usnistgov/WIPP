@@ -1,22 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: wipp-keycloak
+  name: argo
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   tls:
     - hosts:
-      - KEYCLOAK_URL_VALUE
-      secretName: WIPP_TLS_SECRET_VALUE
+      - ARGO_URL_VALUE
+      secretName: WIPP_TLS_SECRET_VALUE 
   rules:
-  - host: KEYCLOAK_URL_VALUE
+  - host: ARGO_URL_VALUE
     http:
       paths:
       - path: "/"
         pathType: Prefix
         backend:
           service:
-            name: wipp-keycloak
+            name: argo-server
             port: 
-              number: 8080
+              number: 2746
+

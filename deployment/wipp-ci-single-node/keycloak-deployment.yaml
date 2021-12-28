@@ -21,19 +21,34 @@ spec:
         - name: DB_ADDR
           value: postgres
         - name: DB_DATABASE
-          value: keycloak
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: DB_DATABASE
         - name: DB_PASSWORD
-          value: DB_PASSWORD_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: DB_PASSWORD
         - name: DB_SCHEMA
           value: public
         - name: DB_USER
-          value: DB_USER_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: DB_USER
         - name: DB_VENDOR
           value: POSTGRES
         - name: KEYCLOAK_PASSWORD
-          value: KEYCLOAK_PASSWORD_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: KEYCLOAK_PASSWORD
         - name: KEYCLOAK_USER
-          value: KEYCLOAK_USER_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: keycloak
+              key: KEYCLOAK_USER
         - name:  PROXY_ADDRESS_FORWARDING
           value: "true"
         image: quay.io/keycloak/keycloak:11.0.2
