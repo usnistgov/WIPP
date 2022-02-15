@@ -181,7 +181,7 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
 
 1. Install Multipass from Snap Store:
 ```
-sudo snap install multipass --classic --channel=1.21/stable
+sudo snap install multipass --classic --beta
 ```
 2. Once installed, open the terminal and create VM:
 ```
@@ -191,7 +191,7 @@ multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
 ```
 multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
-multipass exec wipp -- sudo snap install microk8s --classic
+multipass exec wipp -- sudo snap install microk8s --classic --channel=1.21/stable
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
