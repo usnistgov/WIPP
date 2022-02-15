@@ -116,7 +116,7 @@ Depending on your Mac configuration, choose the appropriate amount of CPU, RAM a
 ```
 multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
-multipass exec wipp -- sudo snap install microk8s --classic
+multipass exec wipp -- sudo snap install microk8s --classic --channel=1.21/stable
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
@@ -268,7 +268,7 @@ Depending on your PC configuration, choose the appropriate amount of CPU, RAM an
 ```
 multipass exec wipp -- sudo apt update
 multipass exec wipp -- sudo apt install docker.io
-multipass exec wipp -- sudo snap install microk8s --classic
+multipass exec wipp -- sudo snap install microk8s --classic --channel=1.21/stable
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
