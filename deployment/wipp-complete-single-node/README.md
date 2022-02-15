@@ -2,7 +2,7 @@
 
 WIPP relies on Kubernetes (k8s) to run. The following instructions will allow you to deploy a local testing version of WIPP on a single-node Kubernetes cluster. This configuration is insecure and not meant for production.
 
-Please note that this installation has been tested with Kubernetes versions 1.13 to 1.18 and may not work properly with versions < 1.13.
+Please note that this installation has been tested with Kubernetes versions 1.13 to 1.21 and may not work properly with versions < 1.13 and > 1.21.
 
 ## Installation
 
@@ -181,7 +181,7 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
 
 1. Install Multipass from Snap Store:
 ```
-sudo snap install multipass --classic --beta
+sudo snap install multipass --classic --channel=1.21/stable
 ```
 2. Once installed, open the terminal and create VM:
 ```
@@ -197,7 +197,7 @@ multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
+multipass exec wipp -- /snap/bin/microk8s.status
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
