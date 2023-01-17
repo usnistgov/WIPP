@@ -58,7 +58,7 @@ spec:
     spec:
       serviceAccountName: wipp-backend-sa
       containers:
-        - image: wipp/wipp-backend:3.0.1
+        - image: wipp/wipp-backend:3.1.0-RC1
           name: wipp-backend
           imagePullPolicy: Always
           args: ["wipp-mongo", "27017", "wipp-pv-claim"]

@@ -14,10 +14,10 @@ spec:
         app: wipp-tensorboard
     spec:
       containers:
-      - image: tensorflow/tensorflow:2.0.0b1-py3
+      - image: tensorflow/tensorflow:2.10.0
         name: wipp-tensorboard
         command: ["tensorboard"]
-        args: ["--logdir=/data/WIPP-plugins/tensorboard-logs"]
+        args: ["--logdir=/data/WIPP-plugins/tensorboard-logs", "--host", "0.0.0.0"]
         volumeMounts:
         - mountPath: /data/WIPP-plugins
           name: data
