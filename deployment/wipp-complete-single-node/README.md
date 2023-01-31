@@ -2,7 +2,7 @@
 
 WIPP relies on Kubernetes (k8s) to run. The following instructions will allow you to deploy a local testing version of WIPP on a single-node Kubernetes cluster. This configuration is insecure and not meant for production.
 
-Please note that this installation has been tested with Kubernetes versions 1.13 to 1.21 and may not work properly with versions < 1.13 and > 1.21.
+Please note that this installation has been tested with Kubernetes versions 1.16 to 1.25 and may not work properly with other versions.
 
 ## Installation
 
@@ -15,9 +15,9 @@ If you do not have Kubernetes cluster or don't know how to create one, follow th
 
 All of these sets of instructions assume that you have cloned or downloaded this repository, and your current working directory is set to the `deployment/wipp-complete-single-node` folder of this repository.
 
-### Upgrading from WIPP 3.0.0-beta/beta2 WIPP-3.0.0
+### Upgrading from WIPP 3.0.0/3.0.1 to WIPP-3.1.0-RC1
 
-If you already have a running instance of WIPP 3.0.0-beta and want to upgrade to WIPP 3.0.1, please follow the upgrade instructions according to your installation setup:
+If you already have a running instance of WIPP 3.0.1 and want to upgrade to WIPP 3.1.0-RC1, please follow the upgrade instructions according to your installation setup:
 
 - [macOS (with Docker Desktop)](#macos-with-docker-desktop) - follow steps 4 to 10
 - [macOS (with Multipass+microk8s)](#macos-with-multipassmicrok8s) - follow steps 4 to 10
@@ -46,8 +46,6 @@ Kubernetes require to specify the volume size before deploying apps. `wipp-singl
 | [`mongo-pv-claim`](wipp-single-node.yaml#L157)     | MongoDB database for WIPP                  | 1Gi          |
 | [`postgres-pv-claim`](wipp-single-node.yaml#L214)     | Postgres database for WIPP-Keycloak     | 1Gi          |
 | [`wipp-pv-claim`](wipp-single-node.yaml#L554)      | WIPP storage for images and data           | 20Gi         |
-| [`notebooks-pv-claim`](wipp-single-node.yaml#L989) | Shared storage for all Notebook users      | 5Gi          |
-| [`claim-{username}`](wipp-single-node.yaml#L532)   | Individual storage for each Notebook users | 1Gi          |
 
 ### macOS (with Docker Desktop)
 
@@ -89,17 +87,15 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 8. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
-   * Notebooks: x.x.x.x:32003
-   * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
    
 9. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
-10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+10. (Optional) If you are upgrading from WIPP 3.0.0/3.0.1, a database migration is necessary for existing data to be accessible:
 
 ```
-kubectl apply -f wipp-database-migration-3.0.0.yaml
+kubectl apply -f wipp-database-migration-3.1.0.yaml
 ```
 
 ### macOS (with Multipass+microk8s)
@@ -108,21 +104,21 @@ kubectl apply -f wipp-database-migration-3.0.0.yaml
 2. Once installed, open the terminal and create VM:
 
 ```
-multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
+multipass launch --name wipp --cpus 4 --mem 8G --disk 100G focal
 ```
 
 Depending on your Mac configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
 3. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update
-multipass exec wipp -- sudo apt install docker.io
-multipass exec wipp -- sudo snap install microk8s --classic --channel=1.21/stable
+multipass exec wipp -- sudo apt-get update
+multipass exec wipp -- sudo apt-get install docker.io
+multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
+multipass exec wipp -- /snap/bin/microk8s.status --wait-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
@@ -164,17 +160,15 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 8. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
-   * Notebooks: x.x.x.x:32003
-   * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
 
 9. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
-10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+10. (Optional) If you are upgrading from WIPP 3.0.0/3.0.1, a database migration is necessary for existing data to be accessible:
 
 ```
-kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
+kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.1.0.yaml
 ```
 
 ### Linux (Multipass+microk8s)
@@ -185,19 +179,19 @@ sudo snap install multipass --classic --beta
 ```
 2. Once installed, open the terminal and create VM:
 ```
-multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
+multipass launch --name wipp --cpus 4 --mem 8G --disk 100G focal
 ```
 3. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update
-multipass exec wipp -- sudo apt install docker.io
-multipass exec wipp -- sudo snap install microk8s --classic --channel=1.21/stable
+multipass exec wipp -- sudo apt-get update
+multipass exec wipp -- sudo apt-get install docker.io
+multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status
+multipass exec wipp -- /snap/bin/microk8s.status --wait-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
@@ -239,55 +233,52 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 8. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
-   * Notebooks: x.x.x.x:32003
-   * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
 
 9. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
-10. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+10. (Optional) If you are upgrading from WIPP 3.0.0/3.0.1, a database migration is necessary for existing data to be accessible:
 
 ```
-kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
+kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.1.0.yaml
 ```
 
 ### Windows 10 (Multipass+microk8s)
-Make sure you have Windows 10 Pro, Enterprise or Education to use the standard Multipass installation with Hyper-V; Windows 10 Home is not supported and will require an installation of VirtualBox.
+Make sure you have Windows 10 Pro, Enterprise or Education to use the standard Multipass installation with Hyper-V; Windows 10 Home is not supported and will require an installation of VirtualBox. All commands should be executed using [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3).
 
 1. Enable Hyper-V on Windows: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v  
 If you are unable to enable Hyper-V, or prefer to use VirtualBox, please refer to this [online documentation for installing Multipass on Windows](https://discourse.ubuntu.com/t/installing-multipass-for-windows/9547) and follow the instructions for VirtualBox.
 2. Download and install Multipass for Windows: https://multipass.run/#install Multipass creates on-demand Linux VMs and provides an easy way to run Kubernetes using microk8s. 
 3. Create Multipass VM:
 ```
-multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
+multipass launch --name wipp --cpus 4 --mem 8G --disk 100G focal
 ```
 Depending on your PC configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
 
 4. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update
-multipass exec wipp -- sudo apt install docker.io
-multipass exec wipp -- sudo snap install microk8s --classic --channel=1.21/stable
+multipass exec wipp -- sudo apt-get update
+multipass exec wipp -- sudo apt-get install docker.io
+multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
+multipass exec wipp -- /snap/bin/microk8s.status --wait-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
-5. Print the Kubernetes config:
+5. Copy the MicroK8s config to a `kubeconfig` file in the current directory:
 ```
-multipass exec wipp -- /snap/bin/microk8s.config
+multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
 ```
-Copy the output of the command to `kubeconfig` file in the current directory.
 
 6. Find the IP of Multipass VM:
 ```
 multipass info wipp
 ```
-Copy the IP address `x.x.x.x`.
+Copy the IP address `x.x.x.x`. If multiple addresses are displayed, you may select the first one.
 
 7. Replace all occurences of `localhost` in `wipp-single-node.yaml` and `wipp-realm.json` to the IP address from previous step: `x.x.x.x`.
 
@@ -303,7 +294,7 @@ kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 kubectl.exe --kubeconfig=kubeconfig get pods
 ```
 
-Output should be similar to this one for the pods starting with `wipp-`:
+Keep checking on the status until all WIPP pods are 1/1 Ready and Running (output should be similar to this one for the pods starting with `wipp-`):
 
 ```
 NAME                             READY   STATUS      RESTARTS   AGE
@@ -316,22 +307,20 @@ wipp-tensorboard-xxxxxxx-xxxxx   1/1     Running     0          5m
 10. In browser, access the apps at the following addresses:
    * WIPP: x.x.x.x:32001 
    * Argo: x.x.x.x:32002
-   * Notebooks: x.x.x.x:32003
-   * Plots: x.x.x.x:32004
    * Tensorboard: x.x.x.x:32005
    * Keycloak: x.x.x.x:32006
 
 11. Follow the [Post-installation instructions](wipp-post-installation-instructions.md) to set up a WIPP admin user and start user WIPP.
 
-12. (Optional) If you are upgrading from WIPP beta/beta2, a database migration is necessary for existing data to be accessible:
+12. (Optional) If you are upgrading from WIPP 3.0.0/3.0.1, a database migration is necessary for existing data to be accessible:
 
 ```
-kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.0.0.yaml
+kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.1.0.yaml
 ```
 
 ## Teardown
 
-There are couple of important considerations to keep in mind. If you perform the full teardown, all the data generated or uploaded in any of the apps (WIPP, Notebooks, Plots) **will be lost**. It is possible to do a partial teardown when only the apps are deleted but all the data persist, so you can reinstall WIPP again in the future and continue to use it in the state you left it in. If you would like to delete WIPP from your computer, follow the instructions below:
+There are couple of important considerations to keep in mind. If you perform the full teardown, all the data generated or uploaded in any of the apps **will be lost**. It is possible to do a partial teardown when only the apps are deleted but all the data persist, so you can reinstall WIPP again in the future and continue to use it in the state you left it in. If you would like to delete WIPP from your computer, follow the instructions below:
 
 - [when using Docker for Mac](#Teardown-in-Docker-Desktop)
 - [when using Multipass+microk8s](#Teardown-in-Multipass)
@@ -349,7 +338,7 @@ kubectl delete -f wipp-single-node.yaml
 
 1. Delete all resources created by WIPP (deployments, services, storage, etc.):
 ```
-kubectl --kubeconfig=kubeconfig delete -f wipp-microk8s.yaml
+kubectl --kubeconfig=kubeconfig delete -f wipp-single-node.yaml
 ```
 2. (OPTIONAL) Delete Multipass VM:
 ```

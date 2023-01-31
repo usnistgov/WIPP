@@ -14,7 +14,7 @@ spec:
         app: wipp-frontend
     spec:
       containers:
-      - image: wipp/wipp-frontend:3.0.1
+      - image: wipp/wipp-frontend:3.1.0-RC1
         name: wipp-frontend
         imagePullPolicy: Always
         args: ["wipp-backend", "8080"]
@@ -22,9 +22,9 @@ spec:
         - name: ARGOUIBASE_URL
           value: "http://localhost:32002/workflows/default"
         - name: JUPYTERHUB_URL
-          value: "http://localhost:32003"
+          value: ""
         - name: VISIONUI_URL
-          value: "http://localhost:32004"
+          value: ""
         - name: TENSORBOARD_URL
           value: "http://localhost:32005"
         - name: KEYCLOAK_URL
