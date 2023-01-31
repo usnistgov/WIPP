@@ -104,21 +104,21 @@ kubectl apply -f wipp-database-migration-3.1.0.yaml
 2. Once installed, open the terminal and create VM:
 
 ```
-multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
+multipass launch --name wipp --cpus 4 --mem 8G --disk 100G focal
 ```
 
 Depending on your Mac configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
 3. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update
-multipass exec wipp -- sudo apt install docker.io
+multipass exec wipp -- sudo apt-get update
+multipass exec wipp -- sudo apt-get install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
+multipass exec wipp -- /snap/bin/microk8s.status --wait-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
@@ -179,19 +179,19 @@ sudo snap install multipass --classic --beta
 ```
 2. Once installed, open the terminal and create VM:
 ```
-multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
+multipass launch --name wipp --cpus 4 --mem 8G --disk 100G focal
 ```
 3. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update
-multipass exec wipp -- sudo apt install docker.io
+multipass exec wipp -- sudo apt-get update
+multipass exec wipp -- sudo apt-get install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
+multipass exec wipp -- /snap/bin/microk8s.status --wait-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
 4. Find the IP of Multipass VM:
@@ -245,41 +245,40 @@ kubectl --kubeconfig=kubeconfig apply -f wipp-database-migration-3.1.0.yaml
 ```
 
 ### Windows 10 (Multipass+microk8s)
-Make sure you have Windows 10 Pro, Enterprise or Education to use the standard Multipass installation with Hyper-V; Windows 10 Home is not supported and will require an installation of VirtualBox.
+Make sure you have Windows 10 Pro, Enterprise or Education to use the standard Multipass installation with Hyper-V; Windows 10 Home is not supported and will require an installation of VirtualBox. All commands should be executed using [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3).
 
 1. Enable Hyper-V on Windows: https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v  
 If you are unable to enable Hyper-V, or prefer to use VirtualBox, please refer to this [online documentation for installing Multipass on Windows](https://discourse.ubuntu.com/t/installing-multipass-for-windows/9547) and follow the instructions for VirtualBox.
 2. Download and install Multipass for Windows: https://multipass.run/#install Multipass creates on-demand Linux VMs and provides an easy way to run Kubernetes using microk8s. 
 3. Create Multipass VM:
 ```
-multipass launch --name wipp --cpus 4 --mem 8G --disk 100G ubuntu
+multipass launch --name wipp --cpus 4 --mem 8G --disk 100G focal
 ```
 Depending on your PC configuration, choose the appropriate amount of CPU, RAM and disk available for WIPP.
 
 4. Install and start microk8s:
 ```
-multipass exec wipp -- sudo apt update
-multipass exec wipp -- sudo apt install docker.io
+multipass exec wipp -- sudo apt-get update
+multipass exec wipp -- sudo apt-get install docker.io
 multipass exec wipp -- sudo snap install microk8s --classic
 multipass exec wipp -- sudo iptables -P FORWARD ACCEPT
 multipass exec wipp -- sudo usermod -a -G microk8s ubuntu
 multipass exec wipp -- /snap/bin/microk8s.start
 multipass exec wipp -- /snap/bin/microk8s.enable rbac
 multipass exec wipp -- /snap/bin/microk8s.enable dns
-multipass exec wipp -- /snap/bin/microk8s.status --wait-for-ready
+multipass exec wipp -- /snap/bin/microk8s.status --wait-ready
 multipass exec wipp -- /snap/bin/microk8s.enable storage
 ```
-5. Print the Kubernetes config:
+5. Copy the MicroK8s config to a `kubeconfig` file in the current directory:
 ```
-multipass exec wipp -- /snap/bin/microk8s.config
+multipass exec wipp -- /snap/bin/microk8s.config > kubeconfig
 ```
-Copy the output of the command to `kubeconfig` file in the current directory.
 
 6. Find the IP of Multipass VM:
 ```
 multipass info wipp
 ```
-Copy the IP address `x.x.x.x`.
+Copy the IP address `x.x.x.x`. If multiple addresses are displayed, you may select the first one.
 
 7. Replace all occurences of `localhost` in `wipp-single-node.yaml` and `wipp-realm.json` to the IP address from previous step: `x.x.x.x`.
 
@@ -295,7 +294,7 @@ kubectl.exe --kubeconfig=kubeconfig apply -f wipp-single-node.yaml
 kubectl.exe --kubeconfig=kubeconfig get pods
 ```
 
-Output should be similar to this one for the pods starting with `wipp-`:
+Keep checking on the status until all WIPP pods are 1/1 Ready and Running (output should be similar to this one for the pods starting with `wipp-`):
 
 ```
 NAME                             READY   STATUS      RESTARTS   AGE
@@ -339,7 +338,7 @@ kubectl delete -f wipp-single-node.yaml
 
 1. Delete all resources created by WIPP (deployments, services, storage, etc.):
 ```
-kubectl --kubeconfig=kubeconfig delete -f wipp-microk8s.yaml
+kubectl --kubeconfig=kubeconfig delete -f wipp-single-node.yaml
 ```
 2. (OPTIONAL) Delete Multipass VM:
 ```
