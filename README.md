@@ -29,8 +29,8 @@ The core of the WIPP framework consists of:
 - WIPP Plugins, algorithmic plugins packaged as Docker images.
 
 Additional tools can be added to the WIPP core for a more complete system:
-- [JupyterHub](https://github.com/LabShare/notebooks-deploy), to develop polyglot Jupyter notebooks that can be used in WIPP workflows,
-- [Plots](https://hub.docker.com/r/labshare/vision-ui), for scalable and interactive scatterplots visualization,
+- [JupyterHub](https://github.com/PolusAI/jupyterlab-extensions/tree/master/jupyterlab_wipp), to develop polyglot Jupyter notebooks that can be used in WIPP workflows,
+- [Plots](https://github.com/PolusAI/polus-plots-ui), for scalable and interactive scatterplots visualization,
 - [Tensorboard](https://www.tensorflow.org/tensorboard), for Tensorflow jobs monitoring,
 - [Elastic Stack](https://www.elastic.co/what-is/elk-stack) for application, logs and system monitoring.
 
@@ -69,9 +69,8 @@ Alternatively, some GPU cards may be compatible with the preview release of the 
 
 
 ### Important security information
-The WIPP framework is currently in beta version and instructions are provided for deploying a testing instance of the system.  
-*The Web Image Processing Pipelines system (WIPP) version 3.0.0-beta does not include any web security management. WIPP 3.0.0-beta allows unrestricted uploading of files via the web browser interface and the uploaded files interact with the file system as well as with an instance of MongoDB database.
-WIPP 3.0.0-beta is intended for deployment on private networks behind a firewall. Future releases will include account and upload access management.*
+The WIPP framework deployment instructions are provided for deploying a testing instance of the system. Additional configurations may be required for a secure and scalable deployment.
+*We recommend deployments on private networks behind a firewall.*
 
 ## User Guide
 
@@ -84,7 +83,15 @@ To test a fresh installation of WIPP, we provide three sample datasets with inst
 ## WIPP plugins
 
 Links to manifest files to install the currently available WIPP plugins can be found in the [plugins folder](plugins).  
-*Documentation about how to create custom WIPP plugins coming soon!*
+
+Part of the WIPP ecosystem, the WIPP Registry allows the registration and search of available plugins:
+- Demo instance https://wipp-plugins.nist.gov/
+- Deployment instructions available [here](https://github.com/usnistgov/WIPP-Registry)
+
+Existing WIPP plugins can be used as learn-by-example templates for creating new plugins. A basic template for Python-based plugins is provided here: [Python sample plugin](https://github.com/usnistgov/WIPP-Plugins-base-templates/tree/master/sample-plugins/python-threshold).
+
+The WIPP plugin manifest schema is available [at this link](https://github.com/usnistgov/WIPP-Plugins-base-templates/blob/master/plugin-manifest/schema/wipp-plugin-manifest-schema.json).
+
 
 ## Troubleshooting
 
