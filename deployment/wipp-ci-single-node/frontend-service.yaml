@@ -9,18 +9,13 @@ metadata:
     service: wipp-frontend
   name: wipp-frontend
 spec:
-  type: NodePort
   ports:
   - name: http
     port: 80
     protocol: TCP
     targetPort: 80
-    nodePort: 30101
   - name: https
     port: 443
     protocol: TCP
-    targetPort: 80
   selector:
     app: wipp-frontend
-status:
-  loadBalancer: {}

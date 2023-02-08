@@ -16,12 +16,21 @@ spec:
     spec:
       containers:
       - env:
-        - name: POSTGRES_DB
-          value: POSTGRES_DB_VALUE
-        - name: POSTGRES_PASSWORD
-          value: POSTGRES_PASSWORD_VALUE
         - name: POSTGRES_USER
-          value: POSTGRES_USER_VALUE
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: POSTGRES_DB
         image: postgres:12
         name: postgres
         volumeMounts:

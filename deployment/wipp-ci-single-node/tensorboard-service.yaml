@@ -11,10 +11,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: "6006"
+  - name: http
     port: 6006
     targetPort: 6006
-    nodePort: 30601
   selector:
     app: wipp-tensorboard
 status:

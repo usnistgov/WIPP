@@ -31,10 +31,6 @@ spec:
           value: KEYCLOAK_URL_VALUE
         - name: TENSORBOARD_URL
           value: TENSORBOARD_URL_VALUE
-        - name: JUPYTERHUB_URL
-          value: JUPYTERHUB_URL_VALUE
-        - name: VISIONUI_URL
-          value: VISIONUI_URL_VALUE
         ports:
         - name: http
           containerPort: 80
@@ -42,6 +38,4 @@ spec:
           containerPort: 443
         resources: {}
       restartPolicy: Always
-      imagePullSecrets:
-      - name: regcred
 status: {}

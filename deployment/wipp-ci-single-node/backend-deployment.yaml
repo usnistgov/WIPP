@@ -81,6 +81,4 @@ spec:
         persistentVolumeClaim:
           claimName: wippdata-pvc
       restartPolicy: Always
-      imagePullSecrets:
-      - name: regcred
 status: {}
