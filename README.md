@@ -25,7 +25,7 @@ The core of the WIPP framework consists of:
 - the [WIPP web UI](https://github.com/usnistgov/WIPP-frontend), an Angular 7 application,
 - a [MongoDB](https://www.mongodb.com/) database,
 - [Keycloak], an open source identity and access management server,
-- [Argo Workflows](https://argoproj.github.io/argo/), a container native workflow engine for Kubernetes,
+- [Argo Workflows](https://argoproj.github.io/argo-workflows/), a container native workflow engine for Kubernetes,
 - WIPP Plugins, algorithmic plugins packaged as Docker images.
 
 Additional tools can be added to the WIPP core for a more complete system:
