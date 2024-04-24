@@ -48,3 +48,7 @@ The WIPP team provides the following plugins for the WIPP system:
 | ------------- |:-------------:| :-----:|
 | Feature Pyramid Networks Image Instance Segmentation Inference   | [Github](https://github.com/usnistgov/WIPP-fpn-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-fpn-inference-plugin/blob/main/plugin.json) |
 
+**StarDist inference plugin**
+| Name        | Repository           | Plugin manifest  |
+| ------------- |:-------------:| :-----:|
+| StarDist Object Detection inference | [Github](https://github.com/usnistgov/WIPP-StarDist-inference-plugin) | [manifest](https://github.com/usnistgov/WIPP-StarDist-inference-plugin/blob/main/plugin.json) |
