@@ -88,9 +88,9 @@ Part of the WIPP ecosystem, the WIPP Registry allows the registration and search
 - Demo instance https://wipp-plugins.nist.gov/
 - Deployment instructions available [here](https://github.com/usnistgov/WIPP-Registry)
 
-Existing WIPP plugins can be used as learn-by-example templates for creating new plugins. A basic template for Python-based plugins is provided here: [Python sample plugin](https://github.com/usnistgov/WIPP-Plugins-base-templates/tree/master/sample-plugins/python-threshold).
+Existing WIPP plugins can be used as learn-by-example templates for creating new plugins. A basic template for Python-based plugins is provided here: [Python sample plugin](https://github.com/usnistgov/fair-chain-compute-container/tree/master/sample-tools/python-threshold).
 
-The WIPP plugin manifest schema is available [at this link](https://github.com/usnistgov/WIPP-Plugins-base-templates/blob/master/plugin-manifest/schema/wipp-plugin-manifest-schema.json).
+The WIPP plugin manifest schema is available [at this link](https://github.com/usnistgov/fair-chain-compute-container/blob/master/schema/manifest.schema.json).
 
 
 ## Troubleshooting
